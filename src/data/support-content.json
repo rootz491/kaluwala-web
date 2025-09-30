@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "title": "Support Center",
+    "subtitle": "Need help? Find answers to common questions or get in touch with our support team."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "categories": [
+      {
+        "title": "Planning Your Visit",
+        "questions": [
+          {
+            "question": "What is the best time to visit Kaluwala?",
+            "answer": "The best time to visit Kaluwala is from March to June and September to November. During these months, the weather is pleasant with clear skies and comfortable temperatures for outdoor activities."
+          },
+          {
+            "question": "How do I book accommodation in Kaluwala?",
+            "answer": "You can contact local homestays and guesthouses directly through phone or email. We also have partnerships with several eco-friendly accommodations that you can book through our contact page."
+          },
+          {
+            "question": "What should I pack for my visit?",
+            "answer": "Pack comfortable walking shoes, warm clothing for evenings, sunscreen, a hat, and a water bottle. If visiting during monsoon, bring rain gear. Don't forget your camera to capture the beautiful landscapes!"
+          }
+        ]
+      },
+      {
+        "title": "Local Information",
+        "questions": [
+          {
+            "question": "Are there ATMs or banks in Kaluwala?",
+            "answer": "There are limited banking facilities in Kaluwala. We recommend carrying sufficient cash from nearby towns like Chamba or Tehri. Some accommodations may accept digital payments."
+          },
+          {
+            "question": "What activities are available in Kaluwala?",
+            "answer": "Kaluwala offers nature walks, forest trekking, river activities at Song River, visits to Kalusidh Temple, bird watching, photography, and stargazing. Most activities focus on connecting with nature and local culture."
+          },
+          {
+            "question": "Is mobile network available?",
+            "answer": "Mobile network coverage varies by operator. BSNL and Airtel generally have better coverage in the area. Internet connectivity may be limited, making it perfect for a digital detox!"
+          }
+        ]
+      },
+      {
+        "title": "Safety & Guidelines",
+        "questions": [
+          {
+            "question": "Is Kaluwala safe for solo travelers?",
+            "answer": "Yes, Kaluwala is generally safe for solo travelers. The local community is welcoming and helpful. However, always inform someone about your travel plans and carry emergency contact numbers."
+          },
+          {
+            "question": "Are there any environmental guidelines I should follow?",
+            "answer": "Please practice responsible tourism: don't litter, respect local wildlife, use water conservatively, support local businesses, and follow marked trails. Help us preserve Kaluwala's natural beauty for future generations."
+          }
+        ]
+      }
+    ]
+  },
+  "supportChannels": {
+    "title": "Get Support",
+    "description": "Choose the best way to reach us based on your needs.",
+    "channels": [
+      {
+        "title": "Email Support",
+        "description": "Send us an email for detailed queries",
+        "contact": "support@kaluwala.in",
+        "responseTime": "Within 24 hours",
+        "icon": "mail"
+      },
+      {
+        "title": "Phone Support",
+        "description": "Call us for immediate assistance",
+        "contact": "+91 9876543210",
+        "responseTime": "9 AM - 6 PM",
+        "icon": "phone"
+      },
+      {
+        "title": "WhatsApp",
+        "description": "Quick questions and updates",
+        "contact": "+91 9876543210",
+        "responseTime": "Usually within 2 hours",
+        "icon": "message-circle"
+      }
+    ]
+  },
+  "emergencyInfo": {
+    "title": "Emergency Contacts",
+    "description": "Important numbers to keep handy during your visit.",
+    "contacts": [
+      {
+        "service": "Police Station (Chamba)",
+        "number": "01376-248XXX"
+      },
+      {
+        "service": "District Hospital (Tehri)",
+        "number": "01376-233XXX"
+      },
+      {
+        "service": "Tourist Helpline",
+        "number": "1363"
+      },
+      {
+        "service": "Emergency Services",
+        "number": "112"
+      }
+    ]
+  },
+  "seo": {
+    "title": "Support Center | Kaluwala",
+    "description": "Get help and support for your visit to Kaluwala. Find answers to frequently asked questions and contact our support team.",
+    "keywords": [
+      "Kaluwala support",
+      "help center",
+      "visit planning",
+      "Kaluwala FAQ",
+      "travel assistance"
+    ]
+  }
+}

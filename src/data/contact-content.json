@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us. We'd love to hear from you and help with any questions about Kaluwala."
+  },
+  "contactInfo": {
+    "address": {
+      "title": "Visit Us",
+      "lines": [
+        "Kaluwala Village",
+        "Dehradun District",
+        "Uttarakhand, India",
+        "PIN: 248140"
+      ]
+    },
+    "phone": {
+      "title": "Call Us",
+      "primary": "+91 9876543210",
+      "secondary": "+91 9876543211"
+    },
+    "email": {
+      "title": "Email Us",
+      "general": "hello@kaluwala.in",
+      "support": "support@kaluwala.in"
+    },
+    "hours": {
+      "title": "Visit Hours",
+      "weekdays": "9:00 AM - 6:00 PM",
+      "weekends": "8:00 AM - 7:00 PM",
+      "note": "Open all days of the year"
+    }
+  },
+  "directions": {
+    "title": "How to Reach",
+    "description": "Kaluwala is accessible by road from major cities in Uttarakhand.",
+    "routes": [
+      {
+        "from": "Dehradun",
+        "distance": "85 km",
+        "duration": "2.5 hours",
+        "description": "Take NH-7 towards Rishikesh, then follow signs to Kaluwala via Jollygrant."
+      },
+      {
+        "from": "Rishikesh",
+        "distance": "15 km",
+        "duration": "45 minutes",
+        "description": "Take the Rishikesh-Dehradun road, continue to Ranipokri and then to Kaluwala."
+      }
+    ]
+  },
+  "contactForm": {
+    "title": "Send us a Message",
+    "description": "Fill out the form below and we'll get back to you within 24 hours.",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number (Optional)",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "submitText": "Send Message"
+  },
+  "seo": {
+    "title": "Contact Us | Kaluwala",
+    "description": "Get in touch with Kaluwala. Find our location, contact details, and how to reach our beautiful village in Uttarakhand.",
+    "keywords": [
+      "Kaluwala contact",
+      "visit Kaluwala",
+      "Uttarakhand tourism contact",
+      "Kaluwala village location",
+      "how to reach Kaluwala"
+    ]
+  }
+}

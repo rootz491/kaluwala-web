@@ -42,7 +42,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const [post, categories, allPosts] = await Promise.all([
-    getPostBySlug(params.slug),
+    getPostBySlug(params?.slug),
     getAllCategories(),
     getAllPosts(),
   ]);
