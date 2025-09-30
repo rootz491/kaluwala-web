@@ -13,7 +13,7 @@ export function BlogPage({ posts }: BlogPageProps) {
     <HomeLayout>
       <div className="min-h-screen pt-20">
         <main className="flex-1">
-          <div className="container py-8">
+          <div className="max-w-7xl mx-auto px-4 py-8">
             <div className="space-y-8">
               <div className="text-center space-y-4">
                 <Heading level={1}>Blog</Heading>
