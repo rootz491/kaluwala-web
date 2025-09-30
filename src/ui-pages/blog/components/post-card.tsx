@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BlogPost } from "@/types/sanity";
-import { Calendar, Clock, User } from "lucide-react";
+import { Clock, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,14 +15,6 @@ interface PostCardProps {
 }
 
 export function PostCard({ post, variant = "default" }: PostCardProps) {
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -92,10 +84,6 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
                   {post.author?.name}
                 </span>
               </div>
-              <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-                <Calendar className="h-3 w-3" />
-                <span>{formatDate(post.publishedAt!)}</span>
-              </div>
               {post.readingTime && (
                 <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                   <Clock className="h-3 w-3" />
@@ -140,10 +128,6 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
               <User className="h-3 w-3" />
               <span>{post.author?.name}</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <Calendar className="h-3 w-3" />
-              <span>{formatDate(post.publishedAt!)}</span>
-            </div>
           </div>
         </div>
         {post.featuredImage && (
@@ -160,74 +144,107 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
     );
   }
 
+  // Default masonry card with title overlay on blurred image
   return (
-    <Card className="overflow-hidden h-full">
-      <div className="relative h-48 w-full">
-        {post.featuredImage ? (
-          <Image
-            src={post.featuredImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="h-full w-full bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
-            <div className="text-center p-4">
-              <h3 className="font-bold">{post.title}</h3>
-            </div>
-          </div>
-        )}
-      </div>
-      <CardContent className="p-4">
-        <div className="flex flex-wrap gap-1 mb-3">
-          {post.categories?.slice(0, 2).map((category) => (
-            <Badge
-              key={category.slug?.current}
-              variant="secondary"
-              className="text-xs"
-            >
-              {category.title}
-            </Badge>
-          ))}
-        </div>
-        <h3 className="font-semibold mb-2 line-clamp-2">
-          <Link
-            href={`/blog/${post.slug?.current}`}
-            className="hover:text-primary transition-colors"
-          >
-            {post.title}
-          </Link>
-        </h3>
-        {post.excerpt && (
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-            {post.excerpt}
-          </p>
-        )}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Avatar className="h-6 w-6">
-              <AvatarImage
-                src={
-                  typeof post.author?.image === "string"
-                    ? post.author.image
-                    : post.author?.image?.asset?.url
-                }
-                alt={post.author?.name}
+    <div className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+      <Link href={`/blog/${post.slug?.current}`} className="block">
+        <div className="relative">
+          {post.featuredImage ? (
+            <>
+              <Image
+                src={post.featuredImage}
+                alt={post.title}
+                width={400}
+                height={300}
+                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
+                style={{ aspectRatio: "auto" }}
               />
-              <AvatarFallback className="text-xs">
-                {getInitials(post.author?.name || "A")}
-              </AvatarFallback>
-            </Avatar>
-            <span className="text-xs text-muted-foreground">
-              {post.author?.name}
-            </span>
-          </div>
-          <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-            <Calendar className="h-3 w-3" />
-            <span>{formatDate(post.publishedAt!)}</span>
-          </div>
+              {/* Overlay with blur effect */}
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
+              <div className="absolute inset-0 backdrop-blur-[1px] group-hover:backdrop-blur-sm transition-all duration-300" />
+
+              {/* Title overlay */}
+              <div className="absolute inset-0 flex flex-col justify-end p-4">
+                <div className="space-y-2">
+                  {post.categories && post.categories.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {post.categories.slice(0, 2).map((category) => (
+                        <Badge
+                          key={category.slug?.current}
+                          variant="secondary"
+                          className="text-xs bg-white/90 text-black"
+                        >
+                          {category.title}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                  <h3 className="font-bold text-white text-lg leading-tight line-clamp-3 drop-shadow-lg">
+                    {post.title}
+                  </h3>
+                  <div className="flex items-center space-x-2">
+                    <Avatar className="h-6 w-6 border-2 border-white/50">
+                      <AvatarImage
+                        src={
+                          typeof post.author?.image === "string"
+                            ? post.author.image
+                            : post.author?.image?.asset?.url
+                        }
+                        alt={post.author?.name}
+                      />
+                      <AvatarFallback className="text-xs bg-white/90 text-black">
+                        {getInitials(post.author?.name || "A")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm text-white/90 drop-shadow-lg">
+                      {post.author?.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="w-full h-48 bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-6">
+              <div className="text-center space-y-2">
+                {post.categories && post.categories.length > 0 && (
+                  <div className="flex flex-wrap gap-1 justify-center mb-2">
+                    {post.categories.slice(0, 2).map((category) => (
+                      <Badge
+                        key={category.slug?.current}
+                        variant="secondary"
+                        className="text-xs"
+                      >
+                        {category.title}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+                <h3 className="font-bold text-lg text-gray-800 line-clamp-3">
+                  {post.title}
+                </h3>
+                <div className="flex items-center justify-center space-x-2">
+                  <Avatar className="h-6 w-6">
+                    <AvatarImage
+                      src={
+                        typeof post.author?.image === "string"
+                          ? post.author.image
+                          : post.author?.image?.asset?.url
+                      }
+                      alt={post.author?.name}
+                    />
+                    <AvatarFallback className="text-xs">
+                      {getInitials(post.author?.name || "A")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="text-sm text-gray-600">
+                    {post.author?.name}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </CardContent>
-    </Card>
+      </Link>
+    </div>
   );
 }

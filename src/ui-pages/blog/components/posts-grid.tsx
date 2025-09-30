@@ -22,9 +22,11 @@ export function PostsGrid({
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6 px-6">
         {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
+          <div key={post._id} className="break-inside-avoid mb-6">
+            <PostCard post={post} />
+          </div>
         ))}
       </div>
     </div>
