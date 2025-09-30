@@ -2,11 +2,12 @@ import { Author, Post } from "@/types/sanity";
 
 interface StructuredDataProps {
   type: "article" | "website" | "organization" | "breadcrumb" | "person";
-  data:
+  data?:
     | Post
     | Author
     | { title: string; description: string; url?: string }
-    | Array<{ name: string; url: string }>;
+    | Array<{ name: string; url: string }>
+    | Record<string, unknown>;
 }
 
 export function StructuredData({ type, data }: StructuredDataProps) {
@@ -22,7 +23,10 @@ export function StructuredData({ type, data }: StructuredDataProps) {
       );
       break;
     case "organization":
-      structuredData = generateOrganizationStructuredData();
+      structuredData =
+        data && Object.keys(data).length > 0
+          ? (data as Record<string, unknown>)
+          : generateOrganizationStructuredData();
       break;
     case "breadcrumb":
       structuredData = generateBreadcrumbStructuredData(
@@ -115,16 +119,24 @@ function generateOrganizationStructuredData() {
     url: baseUrl,
     logo: `${baseUrl}/logo.png`,
     description:
-      "A modern web development company specializing in Next.js, React, and modern web technologies.",
+      "A hidden sanctuary in Uttarakhand where nature's rhythm restores your soul. Discover the serenity of the forest, the Song River, and the ancient Kalusidh Temple.",
     sameAs: [
-      "https://twitter.com/kaluwala",
-      "https://github.com/kaluwala",
+      "https://instagram.com/kaluwala",
       "https://linkedin.com/company/kaluwala",
+      "https://twitter.com/kaluwala",
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "Customer Service",
-      email: "contact@kaluwala.com",
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Uttarakhand",
+      addressCountry: "IN",
+    },
+    areaServed: {
+      "@type": "Place",
+      name: "Uttarakhand, India",
+    },
+    founder: {
+      "@type": "Person",
+      name: "Kaluwala Community",
     },
   };
 }

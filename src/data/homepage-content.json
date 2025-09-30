@@ -1,0 +1,88 @@
+{
+  "hero": {
+    "title": "The Serenity of the Forest, The Spirit of the Hills.",
+    "subtitle": "Discover a hidden sanctuary where nature's rhythm restores your own.",
+    "image": {
+      "src": "/images/hero-butterfly.jpg",
+      "alt": "Purple gradient butterfly illustration representing serenity and nature"
+    }
+  },
+  "sections": [
+    {
+      "id": "forest",
+      "title": "The Forest",
+      "description": "Step out your door and into a world of green. The forests of Kaluwala are a living library of Himalayan flora and fauna.",
+      "image": {
+        "src": "/images/forest-pattern.jpg",
+        "alt": "Abstract forest pattern in earth tones"
+      }
+    },
+    {
+      "id": "song-river",
+      "title": "The Song River",
+      "description": "A short walk leads to the banks of the Song River, its clear waters flowing down from the mountains. It's the perfect spot for a quiet picnic, a moment of reflection, or simply to listen to the music of the water.",
+      "image": {
+        "src": "/images/river-gradient.jpg",
+        "alt": "Purple gradient representing flowing river waters"
+      }
+    },
+    {
+      "id": "kalusidh-temple",
+      "title": "Kalusidh Temple",
+      "description": "Discover the spiritual anchor of our village. The Kalusidh temple is not just a place of worship, but a beacon of peace and local legend that gives Kaluwala its name and its soul.",
+      "image": {
+        "src": "/images/temple-mosaic.jpg",
+        "alt": "Pixelated mosaic pattern representing the ancient temple"
+      }
+    }
+  ],
+  "footer": {
+    "title": "Kaluwala",
+    "description": "A quiet corner of Uttarakhand where nature thrives.",
+    "navigation": {
+      "explore": [
+        { "label": "Blog", "href": "/blog" },
+        { "label": "Culture", "href": "/culture" },
+        { "label": "News", "href": "/news" }
+      ],
+      "support": [
+        { "label": "Contact", "href": "/contact" },
+        { "label": "Support", "href": "/support" },
+        { "label": "Legal", "href": "/legal" }
+      ]
+    },
+    "social": [
+      {
+        "platform": "Instagram",
+        "href": "https://instagram.com/kaluwala",
+        "icon": "instagram"
+      },
+      {
+        "platform": "LinkedIn",
+        "href": "https://linkedin.com/company/kaluwala",
+        "icon": "linkedin"
+      },
+      {
+        "platform": "Twitter",
+        "href": "https://twitter.com/kaluwala",
+        "icon": "twitter"
+      }
+    ]
+  },
+  "seo": {
+    "title": "Kaluwala - A Hidden Sanctuary in Uttarakhand",
+    "description": "Discover the serenity of the forest and spirit of the hills at Kaluwala. A quiet corner of Uttarakhand where nature's rhythm restores your soul, featuring pristine forests, the Song River, and the ancient Kalusidh Temple.",
+    "keywords": [
+      "Kaluwala",
+      "Uttarakhand",
+      "nature sanctuary",
+      "Himalayan forest",
+      "Song River",
+      "Kalusidh Temple",
+      "peaceful retreat",
+      "mountain village",
+      "spiritual destination",
+      "eco-tourism"
+    ]
+  }
+}

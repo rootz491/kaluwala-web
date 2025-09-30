@@ -54,8 +54,8 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-2 mb-4">
             {post.categories?.map((category) => (
-              <Badge key={category} variant="secondary">
-                {category}
+              <Badge key={category.slug.current} variant="secondary">
+                {category.title}
               </Badge>
             ))}
           </div>
@@ -77,7 +77,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
               <div className="flex items-center space-x-2">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
-                    src={post.author?.image}
+                    src={
+                      typeof post.author?.image === "string"
+                        ? post.author.image
+                        : post.author?.image?.asset?.url
+                    }
                     alt={post.author?.name}
                   />
                   <AvatarFallback>
@@ -114,8 +118,12 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <div className="flex-1">
           <div className="flex flex-wrap gap-1 mb-2">
             {post.categories?.slice(0, 2).map((category) => (
-              <Badge key={category} variant="outline" className="text-xs">
-                {category}
+              <Badge
+                key={category.slug.current}
+                variant="outline"
+                className="text-xs"
+              >
+                {category.title}
               </Badge>
             ))}
           </div>
@@ -173,8 +181,12 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
       <CardContent className="p-4">
         <div className="flex flex-wrap gap-1 mb-3">
           {post.categories?.slice(0, 2).map((category) => (
-            <Badge key={category} variant="secondary" className="text-xs">
-              {category}
+            <Badge
+              key={category.slug.current}
+              variant="secondary"
+              className="text-xs"
+            >
+              {category.title}
             </Badge>
           ))}
         </div>
@@ -194,7 +206,14 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Avatar className="h-6 w-6">
-              <AvatarImage src={post.author?.image} alt={post.author?.name} />
+              <AvatarImage
+                src={
+                  typeof post.author?.image === "string"
+                    ? post.author.image
+                    : post.author?.image?.asset?.url
+                }
+                alt={post.author?.name}
+              />
               <AvatarFallback className="text-xs">
                 {getInitials(post.author?.name || "A")}
               </AvatarFallback>

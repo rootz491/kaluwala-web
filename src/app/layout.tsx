@@ -1,5 +1,4 @@
 import { AdSenseScript } from "@/components/adsense";
-import { BlogBreadcrumb, SiteHeader } from "@/components/layout";
 import { StructuredData } from "@/components/seo/structured-data";
 import { generateSEOMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -43,8 +42,6 @@ export default function RootLayout({
           }}
         />
         <div className="relative flex min-h-screen flex-col">
-          <SiteHeader />
-          <BlogBreadcrumb />
           <main className="flex-1">{children}</main>
         </div>
       </body>
