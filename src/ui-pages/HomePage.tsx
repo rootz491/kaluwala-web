@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { AdSenseAd } from '@/components/adsense'
+import { TestAd } from '@/components/adsense'
+import { AD_SLOTS } from '@/lib/adsense'
 import { getSampleData } from '@/lib/sanity'
 import { SanityDocument } from '@/types/sanity'
 
@@ -37,6 +38,15 @@ export function HomePage() {
             A modern web application built with Next.js, Sanity CMS, Tailwind CSS, and shadcn/ui
           </p>
         </header>
+
+        {/* Header Ad */}
+        <div className="max-w-4xl mx-auto mb-16 text-center">
+          <TestAd 
+            style={{ display: 'block', minHeight: '90px' }}
+            className="mx-auto"
+            showLabel={true}
+          />
+        </div>
 
         {/* Status Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -108,18 +118,14 @@ export function HomePage() {
             <div className="text-center">
               <h3 className="font-semibold mb-2">Ad Demo</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                AdSense is configured and ready. Ads will appear once approved by Google.
+                AdSense is configured and ready. Your ads are now live!
               </p>
               
               {/* Demo Ad Placeholder */}
               <div className="border-2 border-dashed border-muted p-8 rounded-lg">
-                <AdSenseAd 
-                  adSlot="your-ad-slot-id"
-                  adFormat="auto"
-                  className="demo-ad"
-                />
+                <TestAd className="demo-ad" />
                 <p className="text-sm text-muted-foreground mt-2">
-                  📢 Ad space - Replace with your actual ad slot ID
+                  📢 Live Ad Unit (Slot ID: {AD_SLOTS.test})
                 </p>
               </div>
             </div>
@@ -131,19 +137,30 @@ export function HomePage() {
                   <li>• AdSense script loaded</li>
                   <li>• ads.txt file in place</li>
                   <li>• Publisher ID: pub-1885905784997014</li>
+                  <li>• Active Ad Slot: {AD_SLOTS.test}</li>
                   <li>• Responsive ads enabled</li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium mb-2">📋 Next Steps:</h4>
+                <h4 className="font-medium mb-2">📋 Status:</h4>
                 <ul className="space-y-1 text-muted-foreground">
-                  <li>• Create ad units in AdSense</li>
-                  <li>• Replace demo slot IDs</li>
-                  <li>• Wait for approval</li>
-                  <li>• Monitor performance</li>
+                  <li>• ✅ Ad units created</li>
+                  <li>• ✅ Ads implemented</li>
+                  <li>• ⏳ Awaiting Google approval</li>
+                  <li>• 📊 Ready for monitoring</li>
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Content Ad */}
+        <div className="max-w-4xl mx-auto mb-16 text-center">
+          <div className="p-4 border rounded-lg bg-muted/20">
+            <TestAd 
+              style={{ display: 'block', minHeight: '250px' }}
+              showLabel={true}
+            />
           </div>
         </div>
 
