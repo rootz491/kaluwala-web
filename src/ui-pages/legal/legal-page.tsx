@@ -12,7 +12,7 @@ export function LegalPage() {
       <div className="min-h-screen pt-20">
         <main className="flex-1">
           {/* Hero Section */}
-          <div className="container py-12">
+          <div className="max-w-7xl mx-auto px-4 py-12">
             <div className="text-center space-y-4 mb-16">
               <Heading level={1}>{hero.title}</Heading>
               <Text variant="lead" className="max-w-2xl mx-auto">

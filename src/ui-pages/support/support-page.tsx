@@ -21,7 +21,7 @@ export function SupportPage() {
       <div className="min-h-screen pt-20">
         <main className="flex-1">
           {/* Hero Section */}
-          <div className="container py-12">
+          <div className="max-w-7xl mx-auto px-4 py-12">
             <div className="text-center space-y-4 mb-16">
               <Heading level={1}>{hero.title}</Heading>
               <Text variant="lead" className="max-w-2xl mx-auto">
@@ -29,7 +29,7 @@ export function SupportPage() {
               </Text>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* FAQ Section */}
               <div className="lg:col-span-2 space-y-8">
                 <div>
