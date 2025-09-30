@@ -11,7 +11,6 @@ export function LegalPage() {
     <HomeLayout>
       <div className="min-h-screen pt-20">
         <main className="flex-1">
-          {/* Hero Section */}
           <div className="max-w-7xl mx-auto px-4 py-12">
             <div className="text-center space-y-4 mb-16">
               <Heading level={1}>{hero.title}</Heading>
@@ -20,7 +19,6 @@ export function LegalPage() {
               </Text>
             </div>
 
-            {/* Legal Sections */}
             <div className="max-w-4xl mx-auto space-y-8">
               {sections.map((section, sectionIndex) => (
                 <Card key={sectionIndex}>
@@ -53,7 +51,6 @@ export function LegalPage() {
               ))}
             </div>
 
-            {/* Additional Contact Info */}
             <div className="max-w-4xl mx-auto mt-12">
               <Card>
                 <CardHeader>
