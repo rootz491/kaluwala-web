@@ -1,7 +1,7 @@
+import { PostsGrid } from "@/components/blog/posts-grid";
 import { HomeLayout } from "@/components/layout";
 import { Heading, Text } from "@/components/ui/typography";
 import { BlogPost, Category } from "@/types/sanity";
-import { PostsGrid } from "./components/posts-grid";
 
 interface BlogPageProps {
   posts: BlogPost[];
