@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
+import { AdSenseAd } from '@/components/adsense'
 import { getSampleData } from '@/lib/sanity'
 import { SanityDocument } from '@/types/sanity'
 
@@ -97,6 +98,52 @@ export function HomePage() {
             <Button variant="secondary">Secondary Button</Button>
             <Button variant="outline">Outline Button</Button>
             <Button variant="ghost">Ghost Button</Button>
+          </div>
+        </div>
+
+        {/* AdSense Demo Section */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <h2 className="text-2xl font-bold mb-6 text-center">Google AdSense Integration</h2>
+          <div className="p-6 border rounded-lg bg-card space-y-4">
+            <div className="text-center">
+              <h3 className="font-semibold mb-2">Ad Demo</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                AdSense is configured and ready. Ads will appear once approved by Google.
+              </p>
+              
+              {/* Demo Ad Placeholder */}
+              <div className="border-2 border-dashed border-muted p-8 rounded-lg">
+                <AdSenseAd 
+                  adSlot="your-ad-slot-id"
+                  adFormat="auto"
+                  className="demo-ad"
+                />
+                <p className="text-sm text-muted-foreground mt-2">
+                  📢 Ad space - Replace with your actual ad slot ID
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <h4 className="font-medium mb-2">✅ Configured:</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• AdSense script loaded</li>
+                  <li>• ads.txt file in place</li>
+                  <li>• Publisher ID: pub-1885905784997014</li>
+                  <li>• Responsive ads enabled</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-medium mb-2">📋 Next Steps:</h4>
+                <ul className="space-y-1 text-muted-foreground">
+                  <li>• Create ad units in AdSense</li>
+                  <li>• Replace demo slot IDs</li>
+                  <li>• Wait for approval</li>
+                  <li>• Monitor performance</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
