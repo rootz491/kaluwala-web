@@ -17,6 +17,30 @@ export interface SanityImage {
   alt?: string
 }
 
+// Portable Text content types (for rich text content from Sanity)
+export interface PortableTextBlock {
+  _type: string
+  _key: string
+  children?: PortableTextSpan[]
+  markDefs?: PortableTextMarkDef[]
+  style?: string
+  listItem?: string
+  level?: number
+}
+
+export interface PortableTextSpan {
+  _type: 'span'
+  _key: string
+  text: string
+  marks?: string[]
+}
+
+export interface PortableTextMarkDef {
+  _type: string
+  _key: string
+  [key: string]: unknown
+}
+
 // Example document type - you can expand this based on your schemas
 export interface Post extends SanityDocument {
   _type: 'post'
@@ -25,7 +49,7 @@ export interface Post extends SanityDocument {
     _type: 'slug'
     current: string
   }
-  content?: any[] // Rich text content
+  content?: PortableTextBlock[] // Rich text content
   excerpt?: string
   mainImage?: SanityImage
   publishedAt?: string
