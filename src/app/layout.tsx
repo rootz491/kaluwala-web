@@ -1,6 +1,9 @@
+import { AdSenseScript } from "@/components/adsense";
+import { BlogBreadcrumb, SiteHeader } from "@/components/layout";
+import { StructuredData } from "@/components/seo/structured-data";
+import { generateSEOMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AdSenseScript } from "@/components/adsense";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,10 +16,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateSEOMetadata({
   title: "Kaluwala Web",
-  description: "A modern web application built with Next.js, Sanity CMS, Tailwind CSS, and shadcn/ui",
-};
+  description:
+    "A modern web application built with Next.js, Sanity CMS, Tailwind CSS, and shadcn/ui",
+  type: "website",
+});
 
 export default function RootLayout({
   children,
@@ -29,7 +34,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AdSenseScript />
-        {children}
+        <StructuredData
+          type="organization"
+          data={{
+            title: "Kaluwala",
+            description:
+              "A modern web development company specializing in Next.js, React, and modern web technologies.",
+          }}
+        />
+        <div className="relative flex min-h-screen flex-col">
+          <SiteHeader />
+          <BlogBreadcrumb />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );

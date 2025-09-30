@@ -1,58 +1,120 @@
 // Basic Sanity document interface
 export interface SanityDocument {
-  _id: string
-  _type: string
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
+  _id: string;
+  _type: string;
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
 }
 
-// Basic image interface from Sanity
 export interface SanityImage {
-  _type: 'image'
+  _type: "image";
   asset: {
-    _ref: string
-    _type: 'reference'
-  }
-  alt?: string
+    _ref: string;
+    _type: "reference";
+    url?: string;
+  };
+  alt?: string;
+  hotspot?: {
+    x: number;
+    y: number;
+    height: number;
+    width: number;
+  };
+  crop?: {
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+  };
 }
 
-// Portable Text content types (for rich text content from Sanity)
 export interface PortableTextBlock {
-  _type: string
-  _key: string
-  children?: PortableTextSpan[]
-  markDefs?: PortableTextMarkDef[]
-  style?: string
-  listItem?: string
-  level?: number
+  _type: string;
+  _key: string;
+  children?: PortableTextSpan[];
+  markDefs?: PortableTextMarkDef[];
+  style?: string;
+  listItem?: string;
+  level?: number;
 }
 
 export interface PortableTextSpan {
-  _type: 'span'
-  _key: string
-  text: string
-  marks?: string[]
+  _type: "span";
+  _key: string;
+  text: string;
+  marks?: string[];
 }
 
 export interface PortableTextMarkDef {
-  _type: string
-  _key: string
-  [key: string]: unknown
+  _type: string;
+  _key: string;
+  [key: string]: unknown;
 }
 
-// Example document type - you can expand this based on your schemas
 export interface Post extends SanityDocument {
-  _type: 'post'
-  title: string
+  _type: "post";
+  title: string;
   slug: {
-    _type: 'slug'
-    current: string
-  }
-  content?: PortableTextBlock[] // Rich text content
-  excerpt?: string
-  mainImage?: SanityImage
-  publishedAt?: string
+    _type: "slug";
+    current: string;
+  };
+  body?: PortableTextBlock[];
+  excerpt?: string;
+  mainImage?: SanityImage;
+  publishedAt?: string;
+  author?: Author;
+  categories?: Category[];
+  tags?: Tag[];
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
 }
 
-// Add more document types as you create schemas in Sanity Studio
+export interface Author extends SanityDocument {
+  _type: "author";
+  name: string;
+  slug: {
+    _type: "slug";
+    current: string;
+  };
+  image?: SanityImage;
+  bio?: PortableTextBlock[];
+  social?: {
+    twitter?: string;
+    linkedin?: string;
+    website?: string;
+  };
+}
+
+export interface Category extends SanityDocument {
+  _type: "category";
+  title: string;
+  slug: {
+    _type: "slug";
+    current: string;
+  };
+  description?: string;
+  color?: string;
+  postCount?: number;
+}
+
+export interface Tag extends SanityDocument {
+  _type: "tag";
+  title: string;
+  slug: {
+    _type: "slug";
+    current: string;
+  };
+}
+
+export interface BlogPost extends Post {
+  featuredImage?: string;
+  authorName?: string;
+  authorImage?: string;
+  authorSlug?: string;
+  categoryTitles?: string[];
+  readingTime?: number;
+}
