@@ -82,7 +82,7 @@ export function BlogLayout({
                     >
                       <Badge variant="outline" asChild>
                         <Link
-                          href={`/blog/category/${category.slug.current}`}
+                          href={`/blog/category/${category.slug?.current}`}
                           className="hover:bg-primary hover:text-primary-foreground transition-colors"
                         >
                           {category.title}

@@ -4,7 +4,7 @@ import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostsGrid } from "@/components/blog/posts-grid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getAllCategories, searchPosts } from "@/lib/blog-api";
+import { getAllCategories, searchPosts } from "@/lib/blog-api-new";
 import { BlogPost, Category } from "@/types/sanity";
 import { Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";

@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getAllCategories, getAllPosts } from "@/lib/blog-api";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
 import { ArrowRight, FolderOpen } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -62,7 +62,7 @@ export default async function CategoriesPage() {
                   className="w-full group-hover:bg-primary/90 transition-colors"
                 >
                   <Link
-                    href={`/blog/category/${category.slug.current}`}
+                    href={`/blog/category/${category.slug?.current}`}
                     className="inline-flex items-center"
                   >
                     View Posts

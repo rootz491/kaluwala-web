@@ -1,7 +1,7 @@
 import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostsGrid } from "@/components/blog/posts-grid";
 import { StructuredData } from "@/components/seo/structured-data";
-import { getAllCategories, getAllPosts } from "@/lib/blog-api";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
 import { generateCategoryMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -15,9 +15,11 @@ interface CategoryPageProps {
 export async function generateStaticParams() {
   const categories = await getAllCategories();
 
-  return categories.map((category) => ({
-    slug: category.slug.current,
-  }));
+  return categories
+    .filter((category) => category.slug?.current)
+    .map((category) => ({
+      slug: category.slug!.current,
+    }));
 }
 
 export async function generateMetadata({
@@ -28,7 +30,7 @@ export async function generateMetadata({
     getAllPosts(),
   ]);
 
-  const category = categories.find((cat) => cat.slug.current === params.slug);
+  const category = categories.find((cat) => cat.slug?.current === params.slug);
 
   if (!category) {
     return {
@@ -37,7 +39,7 @@ export async function generateMetadata({
   }
 
   const categoryPosts = posts.filter((post) =>
-    post.categories?.some((cat) => cat.slug.current === params.slug)
+    post.categories?.some((cat) => cat.slug?.current === params.slug)
   );
 
   return generateCategoryMetadata(category, categoryPosts.length);
@@ -49,14 +51,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     getAllCategories(),
   ]);
 
-  const category = categories.find((cat) => cat.slug.current === params.slug);
+  const category = categories.find((cat) => cat.slug?.current === params.slug);
 
   if (!category) {
     notFound();
   }
 
   const categoryPosts = allPosts.filter((post) =>
-    post.categories?.some((cat) => cat.slug.current === params.slug)
+    post.categories?.some((cat) => cat.slug?.current === params.slug)
   );
 
   return (
@@ -68,7 +70,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           description: category.description || `Posts about ${category.title}`,
           url: `${
             process.env.NEXT_PUBLIC_SITE_URL || "https://kaluwala.in"
-          }/blog/category/${category.slug.current}`,
+          }/blog/category/${category.slug?.current}`,
         }}
       />
       <BlogLayout categories={categories} recentPosts={allPosts.slice(0, 5)}>

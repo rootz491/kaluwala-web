@@ -1,32 +1,36 @@
-'use client'
+"use client";
 
-import { Post, BlogPost } from '@/types/sanity'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Separator } from '@/components/ui/separator'
-import { PortableTextRenderer } from './portable-text'
-import { Calendar, ArrowLeft, Share2 } from 'lucide-react'
-import Link from 'next/link'
-import { urlFor } from '@/lib/sanity'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { urlFor } from "@/lib/sanity";
+import { BlogPost, Post } from "@/types/sanity";
+import { ArrowLeft, Calendar, Share2 } from "lucide-react";
+import Link from "next/link";
+import { PortableTextRenderer } from "./portable-text";
 
 interface PostContentProps {
-  post: Post
-  relatedPosts?: BlogPost[]
+  post: Post;
+  relatedPosts?: BlogPost[];
 }
 
 export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
   const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase()
-  }
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -35,20 +39,20 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
           title: post.title,
           text: post.excerpt,
           url: window.location.href,
-        })
+        });
       } catch (err) {
-        console.log('Error sharing:', err)
+        console.log("Error sharing:", err);
       }
     } else {
-      navigator.clipboard.writeText(window.location.href)
+      navigator.clipboard.writeText(window.location.href);
     }
-  }
+  };
 
-  const authorImage = post.author?.image 
-    ? (typeof post.author.image === 'string' 
-        ? post.author.image 
-        : urlFor(post.author.image).url())
-    : null
+  const authorImage = post.author?.image
+    ? typeof post.author.image === "string"
+      ? post.author.image
+      : urlFor(post.author.image).url()
+    : null;
 
   return (
     <article className="max-w-4xl mx-auto">
@@ -64,7 +68,7 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
           <div className="flex flex-wrap gap-2">
             {post.categories?.map((category) => (
               <Badge key={category._id} variant="secondary">
-                <Link href={`/blog/category/${category.slug.current}`}>
+                <Link href={`/blog/category/${category.slug?.current}`}>
                   {category.title}
                 </Link>
               </Badge>
@@ -87,13 +91,15 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
                 {authorImage && (
                   <AvatarImage src={authorImage} alt={post.author?.name} />
                 )}
-                <AvatarFallback>{getInitials(post.author?.name || 'A')}</AvatarFallback>
+                <AvatarFallback>
+                  {getInitials(post.author?.name || "A")}
+                </AvatarFallback>
               </Avatar>
               <div>
                 <p className="font-medium">
                   {post.author && (
-                    <Link 
-                      href={`/blog/author/${post.author.slug.current}`}
+                    <Link
+                      href={`/blog/author/${post.author.slug?.current}`}
                       className="hover:text-primary transition-colors"
                     >
                       {post.author.name}
@@ -103,7 +109,11 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-3 w-3" />
-                    <span>{post.publishedAt ? formatDate(post.publishedAt) : 'No date'}</span>
+                    <span>
+                      {post.publishedAt
+                        ? formatDate(post.publishedAt)
+                        : "No date"}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -134,8 +144,8 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-2">About the Author</h3>
               <h4 className="font-medium mb-2">
-                <Link 
-                  href={`/blog/author/${post.author.slug.current}`}
+                <Link
+                  href={`/blog/author/${post.author.slug?.current}`}
                   className="hover:text-primary transition-colors"
                 >
                   {post.author.name}
@@ -155,7 +165,7 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
           <div className="grid gap-6 md:grid-cols-2">
             {relatedPosts.slice(0, 2).map((relatedPost) => (
               <div key={relatedPost._id} className="group">
-                <Link href={`/blog/${relatedPost.slug.current}`}>
+                <Link href={`/blog/${relatedPost.slug?.current}`}>
                   <div className="bg-muted/30 rounded-lg p-4 transition-colors group-hover:bg-muted/50">
                     <h4 className="font-semibold mb-2 group-hover:text-primary transition-colors">
                       {relatedPost.title}
@@ -173,5 +183,5 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
         </div>
       )}
     </article>
-  )
+  );
 }

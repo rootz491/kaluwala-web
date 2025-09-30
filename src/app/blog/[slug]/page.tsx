@@ -1,7 +1,11 @@
 import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostContent } from "@/components/blog/post-content";
 import { StructuredData } from "@/components/seo/structured-data";
-import { getAllCategories, getAllPosts, getPostBySlug } from "@/lib/blog-api";
+import {
+  getAllCategories,
+  getAllPosts,
+  getPostBySlug,
+} from "@/lib/blog-api-new";
 import { generateBlogPostMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -15,9 +19,11 @@ interface BlogPostPageProps {
 export async function generateStaticParams() {
   const posts = await getAllPosts();
 
-  return posts.map((post) => ({
-    slug: post.slug.current,
-  }));
+  return posts
+    .filter((post) => post.slug?.current)
+    .map((post) => ({
+      slug: post.slug!.current,
+    }));
 }
 
 export async function generateMetadata({

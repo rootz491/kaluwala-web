@@ -54,14 +54,14 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-2 mb-4">
             {post.categories?.map((category) => (
-              <Badge key={category.slug.current} variant="secondary">
+              <Badge key={category.slug?.current} variant="secondary">
                 {category.title}
               </Badge>
             ))}
           </div>
           <h2 className="text-2xl font-bold mb-3 line-clamp-2">
             <Link
-              href={`/blog/${post.slug.current}`}
+              href={`/blog/${post.slug?.current}`}
               className="hover:text-primary transition-colors"
             >
               {post.title}
@@ -104,7 +104,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
               )}
             </div>
             <Button asChild>
-              <Link href={`/blog/${post.slug.current}`}>Read More</Link>
+              <Link href={`/blog/${post.slug?.current}`}>Read More</Link>
             </Button>
           </div>
         </CardContent>
@@ -119,7 +119,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           <div className="flex flex-wrap gap-1 mb-2">
             {post.categories?.slice(0, 2).map((category) => (
               <Badge
-                key={category.slug.current}
+                key={category.slug?.current}
                 variant="outline"
                 className="text-xs"
               >
@@ -129,7 +129,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           </div>
           <h3 className="font-semibold mb-2 line-clamp-2">
             <Link
-              href={`/blog/${post.slug.current}`}
+              href={`/blog/${post.slug?.current}`}
               className="hover:text-primary transition-colors"
             >
               {post.title}
@@ -182,7 +182,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <div className="flex flex-wrap gap-1 mb-3">
           {post.categories?.slice(0, 2).map((category) => (
             <Badge
-              key={category.slug.current}
+              key={category.slug?.current}
               variant="secondary"
               className="text-xs"
             >
@@ -192,7 +192,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         </div>
         <h3 className="font-semibold mb-2 line-clamp-2">
           <Link
-            href={`/blog/${post.slug.current}`}
+            href={`/blog/${post.slug?.current}`}
             className="hover:text-primary transition-colors"
           >
             {post.title}

@@ -58,7 +58,7 @@ export interface Post extends SanityDocument {
   slug: {
     _type: "slug";
     current: string;
-  };
+  } | null;
   body?: PortableTextBlock[];
   excerpt?: string;
   mainImage?: SanityImage;
@@ -79,7 +79,7 @@ export interface Author extends SanityDocument {
   slug: {
     _type: "slug";
     current: string;
-  };
+  } | null;
   image?: SanityImage;
   bio?: PortableTextBlock[];
   social?: {
@@ -95,7 +95,7 @@ export interface Category extends SanityDocument {
   slug: {
     _type: "slug";
     current: string;
-  };
+  } | null;
   description?: string;
   color?: string;
   postCount?: number;
@@ -107,7 +107,7 @@ export interface Tag extends SanityDocument {
   slug: {
     _type: "slug";
     current: string;
-  };
+  } | null;
 }
 
 export interface BlogPost extends Post {

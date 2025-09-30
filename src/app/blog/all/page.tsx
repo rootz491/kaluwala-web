@@ -1,7 +1,7 @@
 import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostsGrid } from "@/components/blog/posts-grid";
 import { Button } from "@/components/ui/button";
-import { getAllCategories, getAllPosts } from "@/lib/blog-api";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";

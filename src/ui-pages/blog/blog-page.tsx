@@ -1,0 +1,32 @@
+import { SiteFooter, SiteHeader } from "@/components/layout";
+import { Heading, Text } from "@/components/ui/typography";
+import { BlogPost, Category } from "@/types/sanity";
+import { PostsGrid } from "./components/posts-grid";
+
+interface BlogPageProps {
+  posts: BlogPost[];
+  categories: Category[];
+}
+
+export function BlogPage({ posts }: BlogPageProps) {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <div className="container py-8">
+          <div className="space-y-8">
+            <div className="text-center space-y-4">
+              <Heading level={1}>Blog</Heading>
+              <Text variant="lead" className="max-w-2xl mx-auto">
+                Discover insights, tutorials, and stories from our journey in
+                building modern web experiences.
+              </Text>
+            </div>
+            <PostsGrid posts={posts} />
+          </div>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

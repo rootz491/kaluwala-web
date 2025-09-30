@@ -1,4 +1,4 @@
-import { getAllCategories, getAllPosts } from "@/lib/blog-api";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -44,21 +44,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Blog posts
-  const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug.current}`,
-    lastModified: new Date(post._updatedAt || post.publishedAt || new Date()),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  // Blog posts - filter out posts without valid slugs
+  const postPages: MetadataRoute.Sitemap = posts
+    .filter((post) => post.slug?.current)
+    .map((post) => ({
+      url: `${baseUrl}/blog/${post.slug?.current}`,
+      lastModified: new Date(post._updatedAt || post.publishedAt || new Date()),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }));
 
-  // Category pages
-  const categoryPages: MetadataRoute.Sitemap = categories.map((category) => ({
-    url: `${baseUrl}/blog/category/${category.slug.current}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
+  // Category pages - filter out categories without valid slugs
+  const categoryPages: MetadataRoute.Sitemap = categories
+    .filter((category) => category.slug?.current)
+    .map((category) => ({
+      url: `${baseUrl}/blog/category/${category.slug?.current}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
 
   return [...staticPages, ...postPages, ...categoryPages];
 }

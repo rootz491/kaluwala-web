@@ -1,6 +1,6 @@
-import { HomePage } from "@/components/home";
 import { StructuredData } from "@/components/seo";
 import homepageContent from "@/data/homepage-content.json";
+import { HomePage } from "@/ui-pages";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
