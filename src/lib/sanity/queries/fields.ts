@@ -5,7 +5,13 @@ export const POST_FIELDS = `
   excerpt,
   publishedAt,
   _updatedAt,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->
+    }
+  },
   "featuredImage": mainImage.asset->url,
   "author": author->{
     name,
