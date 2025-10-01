@@ -25,12 +25,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
   const [categories, posts] = await Promise.all([
     getAllCategories(),
     getAllPosts(),
   ]);
 
-  const category = categories.find((cat) => cat.slug?.current === params.slug);
+  const category = categories.find((cat) => cat.slug?.current === slug);
 
   if (!category) {
     return {
@@ -39,26 +40,27 @@ export async function generateMetadata({
   }
 
   const categoryPosts = posts.filter((post) =>
-    post.categories?.some((cat) => cat.slug?.current === params.slug)
+    post.categories?.some((cat) => cat.slug?.current === slug)
   );
 
   return generateCategoryMetadata(category, categoryPosts.length);
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params;
   const [allPosts, categories] = await Promise.all([
     getAllPosts(),
     getAllCategories(),
   ]);
 
-  const category = categories.find((cat) => cat.slug?.current === params.slug);
+  const category = categories.find((cat) => cat.slug?.current === slug);
 
   if (!category) {
     notFound();
   }
 
   const categoryPosts = allPosts.filter((post) =>
-    post.categories?.some((cat) => cat.slug?.current === params.slug)
+    post.categories?.some((cat) => cat.slug?.current === slug)
   );
 
   return (
