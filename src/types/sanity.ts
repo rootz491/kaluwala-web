@@ -110,11 +110,19 @@ export interface Tag extends SanityDocument {
   } | null;
 }
 
-export interface BlogPost extends Post {
+export interface BlogPostAuthor {
+  name: string;
+  slug: string; // This is resolved to a string in BLOG_POST_FIELDS
+  image?: string;
+}
+
+export interface BlogPost extends Omit<Post, "author"> {
   featuredImage?: string;
   authorName?: string;
   authorImage?: string;
   authorSlug?: string;
   readingTime?: number;
+  // Override author type for BlogPost to match the resolved query structure
+  author?: BlogPostAuthor;
   // Remove categoryTitles since we now use the full categories array from Post
 }

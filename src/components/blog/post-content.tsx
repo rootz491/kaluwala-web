@@ -99,7 +99,7 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
                 <p className="font-medium">
                   {post.author && (
                     <Link
-                      href={`/blog/author/${post.author.slug?.current}`}
+                      href={`/blog/author/${post.author?.slug}`}
                       className="hover:text-primary transition-colors"
                     >
                       {post.author.name}

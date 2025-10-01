@@ -69,20 +69,19 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
               <div className="flex items-center space-x-2">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
-                    src={
-                      typeof post.author?.image === "string"
-                        ? post.author.image
-                        : post.author?.image?.asset?.url
-                    }
+                    src={post.author?.image}
                     alt={post.author?.name}
                   />
                   <AvatarFallback>
                     {getInitials(post.author?.name || "A")}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-sm text-muted-foreground">
+                <Link
+                  href={`/blog/author/${post.author?.slug}`}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
                   {post.author?.name}
-                </span>
+                </Link>
               </div>
               {post.readingTime && (
                 <div className="flex items-center space-x-1 text-sm text-muted-foreground">
@@ -126,7 +125,12 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           <div className="flex items-center space-x-4 text-xs text-muted-foreground">
             <div className="flex items-center space-x-1">
               <User className="h-3 w-3" />
-              <span>{post.author?.name}</span>
+              <Link
+                href={`/blog/author/${post.author?.slug}`}
+                className="hover:text-primary transition-colors"
+              >
+                {post.author?.name}
+              </Link>
             </div>
           </div>
         </div>
@@ -185,20 +189,19 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
                   <div className="flex items-center space-x-2">
                     <Avatar className="h-6 w-6 border-2 border-white/50">
                       <AvatarImage
-                        src={
-                          typeof post.author?.image === "string"
-                            ? post.author.image
-                            : post.author?.image?.asset?.url
-                        }
+                        src={post.author?.image}
                         alt={post.author?.name}
                       />
                       <AvatarFallback className="text-xs bg-white/90 text-black">
                         {getInitials(post.author?.name || "A")}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="text-sm text-white/90 drop-shadow-lg">
+                    <Link
+                      href={`/blog/author/${post.author?.slug}`}
+                      className="text-sm text-white/90 drop-shadow-lg hover:text-white transition-colors"
+                    >
                       {post.author?.name}
-                    </span>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -225,20 +228,19 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
                 <div className="flex items-center justify-center space-x-2">
                   <Avatar className="h-6 w-6">
                     <AvatarImage
-                      src={
-                        typeof post.author?.image === "string"
-                          ? post.author.image
-                          : post.author?.image?.asset?.url
-                      }
+                      src={post.author?.image}
                       alt={post.author?.name}
                     />
                     <AvatarFallback className="text-xs">
                       {getInitials(post.author?.name || "A")}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm text-gray-600">
+                  <Link
+                    href={`/blog/author/${post.author?.slug}`}
+                    className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
+                  >
                     {post.author?.name}
-                  </span>
+                  </Link>
                 </div>
               </div>
             </div>
