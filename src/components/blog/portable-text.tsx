@@ -1,9 +1,8 @@
-import { urlFor } from "@/lib/sanity";
 import { cn } from "@/lib/utils";
 import { PortableTextBlock } from "@/types/sanity";
 import type { PortableTextComponents } from "@portabletext/react";
 import { PortableText } from "@portabletext/react";
-import Image from "next/image";
+import { SmartImage } from "./smart-image";
 
 interface PortableTextRendererProps {
   content: PortableTextBlock[];
@@ -72,43 +71,7 @@ const portableTextComponents: PortableTextComponents = {
   },
   types: {
     image: ({ value }) => {
-      if (!value?.asset) return null;
-
-      try {
-        // Use urlFor to get the proper image URL from Sanity
-        const imageUrl = urlFor(value).width(800).quality(85).url();
-
-        return (
-          <figure className="my-8">
-            <div className="relative overflow-hidden rounded-lg">
-              <Image
-                src={imageUrl}
-                alt={value.alt || "Blog image"}
-                width={800}
-                height={450}
-                className="w-full h-auto object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
-                priority={false}
-              />
-            </div>
-            {value.caption && (
-              <figcaption className="text-sm text-muted-foreground text-center mt-3 italic">
-                {value.caption}
-              </figcaption>
-            )}
-          </figure>
-        );
-      } catch (error) {
-        console.error("Error rendering image:", error);
-        return (
-          <div className="my-8 p-4 bg-muted rounded-lg text-center">
-            <p className="text-muted-foreground">Image could not be loaded</p>
-            {value.alt && (
-              <p className="text-sm text-muted-foreground mt-1">{value.alt}</p>
-            )}
-          </div>
-        );
-      }
+      return <SmartImage value={value} />;
     },
     code: ({ value }) => (
       <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-6">
