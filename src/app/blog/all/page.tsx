@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "All Posts | Kaluwala Blog",
+  title: "All Blogs | Kaluwala Blog",
   description: "Browse all blog posts and articles on Kaluwala.",
 };
 
@@ -23,7 +23,7 @@ export default async function AllPostsPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
-              All Posts
+              All Blogs
             </h1>
             <p className="text-xl text-muted-foreground mt-4">
               Browse through all {posts.length} articles and tutorials.
