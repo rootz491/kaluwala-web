@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface ImageModalProps {
   src: string;
@@ -20,6 +20,8 @@ export function ImageModal({
   isOpen,
   onClose,
 }: ImageModalProps) {
+  const [aspectRatio, setAspectRatio] = useState<number | null>(null);
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -40,10 +42,24 @@ export function ImageModal({
     };
   }, [isOpen, onClose]);
 
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = event.currentTarget;
+    const ratio = img.naturalWidth / img.naturalHeight;
+    setAspectRatio(ratio);
+  };
+
   if (!isOpen) return null;
 
+  // Determine if image is landscape (ratio > 1.2) or portrait/square (ratio <= 1.2)
+  const isLandscape = aspectRatio && aspectRatio > 1.2;
+
+  // Dynamic sizing based on orientation
+  const imageStyles = isLandscape
+    ? { maxWidth: "90vw", maxHeight: "90vh", width: "90vw", height: "auto" }
+    : { maxWidth: "90vw", maxHeight: "85vh", width: "auto", height: "85vh" };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop with blur */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -51,7 +67,7 @@ export function ImageModal({
       />
 
       {/* Modal content */}
-      <div className="relative max-w-[90vw] max-h-[90vh] flex flex-col">
+      <div className="relative flex flex-col items-center">
         {/* Close button */}
         <Button
           variant="outline"
@@ -63,21 +79,23 @@ export function ImageModal({
         </Button>
 
         {/* Image */}
-        <div className="relative max-w-[90vw] max-h-[85vh] overflow-hidden rounded-lg bg-white">
+        <div className="relative overflow-hidden rounded-lg bg-white shadow-2xl">
           <Image
             src={src}
             alt={alt}
             width={1200}
             height={800}
-            className="w-full h-full object-contain"
-            sizes="90vw"
+            style={imageStyles}
+            className="object-contain"
+            sizes={isLandscape ? "90vw" : "85vh"}
             priority
+            onLoad={handleImageLoad}
           />
         </div>
 
         {/* Caption */}
         {caption && (
-          <div className="mt-4 text-center">
+          <div className="mt-4 text-center max-w-[90vw]">
             <p className="text-sm text-white bg-black/70 px-4 py-2 rounded-lg backdrop-blur-sm">
               {caption}
             </p>
