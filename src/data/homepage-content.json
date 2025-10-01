@@ -3,7 +3,7 @@
     "title": "The Serenity of the Forest, The Spirit of the Hills.",
     "subtitle": "Discover a hidden sanctuary where nature's rhythm restores your own.",
     "image": {
-      "src": "/images/hero-butterfly.jpg",
+      "src": "/images/river.jpg",
       "alt": "Purple gradient butterfly illustration representing serenity and nature"
     }
   },
@@ -22,7 +22,7 @@
       "title": "The Song River",
       "description": "A short walk leads to the banks of the Song River, its clear waters flowing down from the mountains. It's the perfect spot for a quiet picnic, a moment of reflection, or simply to listen to the music of the water.",
       "image": {
-        "src": "/images/river-gradient.jpg",
+        "src": "/images/river.jpg",
         "alt": "Purple gradient representing flowing river waters"
       }
     },
