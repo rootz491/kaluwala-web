@@ -115,6 +115,6 @@ export interface BlogPost extends Post {
   authorName?: string;
   authorImage?: string;
   authorSlug?: string;
-  categoryTitles?: string[];
   readingTime?: number;
+  // Remove categoryTitles since we now use the full categories array from Post
 }

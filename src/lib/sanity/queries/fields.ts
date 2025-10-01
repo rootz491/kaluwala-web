@@ -42,7 +42,11 @@ export const BLOG_POST_FIELDS = `
     "slug": slug.current,
     "image": image.asset->url
   },
-  "categories": categories[]->title,
+  "categories": categories[]->{
+    title,
+    "slug": slug.current,
+    description
+  },
   "readingTime": round(length(pt::text(body)) / 5 / 180)
 `;
 
