@@ -1,5 +1,3 @@
-import { BlogLayout } from "@/components/blog/blog-layout";
-import { PostContent } from "@/components/blog/post-content";
 import { StructuredData } from "@/components/seo/structured-data";
 import {
   getAllCategories,
@@ -7,6 +5,7 @@ import {
   getPostBySlug,
 } from "@/lib/blog-api-new";
 import { generateBlogPostMetadata } from "@/lib/seo";
+import { BlogPostPage } from "@/ui-pages";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -41,7 +40,7 @@ export async function generateMetadata({
   return generateBlogPostMetadata(post);
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPageRoute({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const [post, categories, allPosts] = await Promise.all([
     getPostBySlug(slug),
@@ -56,9 +55,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <StructuredData type="article" data={post} />
-      <BlogLayout categories={categories} recentPosts={allPosts.slice(0, 5)}>
-        <PostContent post={post} />
-      </BlogLayout>
+      <BlogPostPage
+        post={post}
+        categories={categories}
+        recentPosts={allPosts.slice(0, 5)}
+      />
     </>
   );
 }
