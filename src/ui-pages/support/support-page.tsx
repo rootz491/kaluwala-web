@@ -14,7 +14,7 @@ const iconMap = {
 };
 
 export function SupportPage() {
-  const { hero, faq, supportChannels, emergencyInfo } = supportContent;
+  const { hero, faq, supportChannels } = supportContent;
 
   return (
     <HomeLayout>
@@ -114,29 +114,6 @@ export function SupportPage() {
                           </div>
                         );
                       })}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Emergency Info */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{emergencyInfo.title}</CardTitle>
-                    <Text variant="muted">{emergencyInfo.description}</Text>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {emergencyInfo.contacts.map((contact, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-between items-center"
-                        >
-                          <Text className="text-sm">{contact.service}</Text>
-                          <Text className="text-sm font-mono font-medium">
-                            {contact.number}
-                          </Text>
-                        </div>
-                      ))}
                     </div>
                   </CardContent>
                 </Card>

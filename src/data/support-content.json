@@ -65,42 +65,6 @@
         "contact": "support@kaluwala.in",
         "responseTime": "Within 24 hours",
         "icon": "mail"
-      },
-      {
-        "title": "Phone Support",
-        "description": "Call us for immediate assistance",
-        "contact": "+91 9876543210",
-        "responseTime": "9 AM - 6 PM",
-        "icon": "phone"
-      },
-      {
-        "title": "WhatsApp",
-        "description": "Quick questions and updates",
-        "contact": "+91 9876543210",
-        "responseTime": "Usually within 2 hours",
-        "icon": "message-circle"
-      }
-    ]
-  },
-  "emergencyInfo": {
-    "title": "Emergency Contacts",
-    "description": "Important numbers to keep handy during your visit.",
-    "contacts": [
-      {
-        "service": "Police Station (Chamba)",
-        "number": "01376-248XXX"
-      },
-      {
-        "service": "District Hospital (Tehri)",
-        "number": "01376-233XXX"
-      },
-      {
-        "service": "Tourist Helpline",
-        "number": "1363"
-      },
-      {
-        "service": "Emergency Services",
-        "number": "112"
       }
     ]
   },
