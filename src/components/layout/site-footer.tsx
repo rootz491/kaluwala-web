@@ -1,4 +1,3 @@
-import TelegramLink from "@/components/telegram/TelegramLink";
 import homepageContent from "@/data/homepage-content.json";
 import Link from "next/link";
 
@@ -31,8 +30,6 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
-              {/* Telegram link will render only when the WebApp is available (client-side) */}
-              <TelegramLink />
             </ul>
           </div>
 

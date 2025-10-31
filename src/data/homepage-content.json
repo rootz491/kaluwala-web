@@ -42,7 +42,8 @@
     "navigation": {
       "explore": [
         { "label": "Blog", "href": "/blog" },
-        { "label": "News", "href": "/news" }
+        { "label": "News", "href": "/news" },
+        { "label": "Telegram", "href": "/telegram" }
       ],
       "support": [
         { "label": "Contact", "href": "/contact" },
