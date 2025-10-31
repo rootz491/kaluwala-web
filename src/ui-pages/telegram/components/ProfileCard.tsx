@@ -47,8 +47,6 @@ export default function ProfileCard({ user, tg }: Props) {
 
   return (
     <section className="mb-6">
-      <h2 className="text-lg font-semibold mb-3">Your profile</h2>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
         <div className="flex flex-col items-center">
           {(() => {
