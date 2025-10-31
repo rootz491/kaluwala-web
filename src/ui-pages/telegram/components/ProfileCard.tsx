@@ -2,6 +2,7 @@
 
 import { TelegramUser, TelegramWebApp } from "@/context/telegram-context";
 import Image from "next/image";
+import { useState } from "react";
 
 interface Props {
   user: TelegramUser | null;
@@ -9,13 +10,59 @@ interface Props {
   sendData: (data: string) => void;
 }
 
-export default function ProfileCard({ user, sendData }: Props) {
+export default function ProfileCard({ user, tg, sendData }: Props) {
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
+    "idle"
+  );
+
+  const handleSubscribe = async () => {
+    setStatus("sending");
+
+    const payloadObj = {
+      action: "subscribe",
+      topic: "blog:new_posts",
+      user: tg?.initDataUnsafe?.user ?? user ?? null,
+      ts: Date.now(),
+    } as const;
+
+    const payload = JSON.stringify(payloadObj);
+
+    const endpoint =
+      (process.env.NEXT_PUBLIC_TELEGRAM_SUBSCRIBE_ENDPOINT as string) ||
+      "/api/telegram/subscribe";
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      });
+      if (!res.ok) throw new Error("bad response");
+    } catch (err) {
+      try {
+        sendData(payload);
+        setStatus("ok");
+        return;
+      } catch {
+        setStatus("error");
+        return;
+      }
+    }
+
+    try {
+      sendData(payload);
+    } catch {
+      // ignore
+    }
+
+    setStatus("ok");
+  };
+
   return (
     <section className="mb-6">
       <h2 className="text-lg font-semibold mb-3">Your profile</h2>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
         <div className="flex flex-col items-center">
-          {/* Photo if available */}
           {(() => {
             const u = user as
               | (Record<string, unknown> & { photo_url?: string })
@@ -53,23 +100,19 @@ export default function ProfileCard({ user, sendData }: Props) {
         <div className="mt-4">
           <button
             className="inline-flex items-center px-3 py-2 bg-primary text-white rounded-md text-sm hover:opacity-95"
-            onClick={() => {
-              const payload = JSON.stringify({
-                action: "subscribe",
-                source: "webapp",
-                ts: Date.now(),
-              });
-              try {
-                sendData(payload);
-              } catch {
-                // noop
-              }
-            }}
+            onClick={handleSubscribe}
+            disabled={status === "sending"}
           >
-            Subscribe to new blog notifications
+            {status === "sending"
+              ? "Subscribing..."
+              : status === "ok"
+              ? "Subscribed"
+              : "Subscribe to new blog notifications"}
           </button>
           <p className="text-xs text-muted-foreground mt-2">
-            We will send a notification to your Telegram when new posts go live.
+            {status === "error"
+              ? "Failed to subscribe. Try again."
+              : "We will send a notification to your Telegram when new posts go live."}
           </p>
         </div>
       </div>
