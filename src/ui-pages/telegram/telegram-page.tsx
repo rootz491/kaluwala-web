@@ -3,22 +3,12 @@
 import useTelegram from "@/hooks/useTelegram";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export function TelegramPageUI() {
-  const { tg, user, themeParams, sendData } = useTelegram();
-
-  const containerStyle: React.CSSProperties = {
-    // backgroundColor: themeParams?.bg_color || "transparent",
-    backgroundColor: "transparent",
-    color: themeParams?.text_color || undefined,
-  };
+  const { user, sendData } = useTelegram();
 
   return (
-    <div
-      className="relative min-h-screen flex items-center justify-center p-8 pt-20"
-      style={containerStyle}
-    >
+    <div className="relative min-h-screen flex items-center justify-center p-8 pt-20">
       <Link
         href="/"
         className="absolute left-4 top-4 inline-flex items-center gap-2 px-3 py-2 rounded-md bg-card/80 hover:bg-card"
@@ -128,13 +118,6 @@ export function TelegramPageUI() {
                                 return String(d);
                               }
                             })()}
-                          </dd>
-                        </div>
-
-                        <div className="col-span-2 mt-3">
-                          <dt className="font-medium">Raw initDataUnsafe</dt>
-                          <dd className="whitespace-pre-wrap text-xs mt-1">
-                            {JSON.stringify(tg?.initDataUnsafe ?? {}, null, 2)}
                           </dd>
                         </div>
                       </dl>
