@@ -16,20 +16,27 @@ export default function ProfileCard({ user, tg }: Props) {
 
   const handleSubscribe = async () => {
     setStatus("sending");
-
-    const payloadObj = {
-      action: "subscribe",
-      topic: "blog:new_posts",
-      user: tg?.initDataUnsafe?.user ?? user ?? null,
-      ts: Date.now(),
-    } as const;
-    const payload = JSON.stringify(payloadObj);
+    // Build minimal payload expected by the server/worker
+    const remoteUser = tg?.initDataUnsafe?.user ?? user ?? null;
+    const payload = {
+      telegram_id: remoteUser?.id ?? null,
+      first_name: remoteUser?.first_name ?? null,
+      username: remoteUser?.username ?? null,
+    };
 
     try {
-      if (tg?.sendData) {
-        tg?.sendData?.(payload);
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
         setStatus("ok");
       } else {
+        console.error("subscribe failed", await res.text());
         setStatus("error");
       }
     } catch (err) {
