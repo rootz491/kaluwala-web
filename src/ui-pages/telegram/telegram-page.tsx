@@ -33,7 +33,6 @@ export function TelegramPageUI() {
       <div className="max-w-4xl w-full bg-background/80 rounded-lg p-8 shadow">
         {user ? (
           <section className="mb-6">
-            <h2 className="text-lg font-semibold mb-3">Your profile</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
               <div className="flex flex-col items-center">
                 {/* Photo if available */}
@@ -77,78 +76,30 @@ export function TelegramPageUI() {
               </div>
 
               <div className="md:col-span-2">
-                {(() => {
-                  const u = user as
-                    | (Record<string, unknown> & {
-                        language_code?: string;
-                        allows_write_to_pm?: boolean;
-                        auth_date?: number | string;
-                      })
-                    | null;
-                  return (
-                    <>
-                      <dl className="text-sm text-muted-foreground grid grid-cols-2 gap-y-2 gap-x-6">
-                        <div>
-                          <dt className="font-medium">ID</dt>
-                          <dd className="mb-1">{String(user.id ?? "-")}</dd>
-                        </div>
-
-                        <div>
-                          <dt className="font-medium">Language</dt>
-                          <dd className="mb-1">{u?.language_code ?? "-"}</dd>
-                        </div>
-
-                        <div>
-                          <dt className="font-medium">Allows write to PM</dt>
-                          <dd className="mb-1">
-                            {u?.allows_write_to_pm ? "Yes" : "No"}
-                          </dd>
-                        </div>
-
-                        <div>
-                          <dt className="font-medium">Auth date</dt>
-                          <dd className="mb-1">
-                            {(() => {
-                              const d = u?.auth_date;
-                              if (!d) return "-";
-                              try {
-                                const n = Number(d) * 1000;
-                                return new Date(n).toLocaleString();
-                              } catch {
-                                return String(d);
-                              }
-                            })()}
-                          </dd>
-                        </div>
-                      </dl>
-
-                      <div className="mt-4">
-                        <button
-                          className="inline-flex items-center px-3 py-2 bg-primary text-white rounded-md text-sm hover:opacity-95"
-                          onClick={() => {
-                            // send a simple subscribe payload to Telegram if available
-                            const payload = JSON.stringify({
-                              action: "subscribe",
-                              topic: "blog:new_posts",
-                            });
-                            try {
-                              sendData(payload);
-                            } catch {
-                              // noop
-                            }
-                          }}
-                        >
-                          Subscribe to new blog notifications
-                        </button>
-                        <p className="text-xs text-muted-foreground mt-2">
-                          We will send a notification to your Telegram when new
-                          posts go live (demo button — requires Telegram WebApp
-                          support).
-                        </p>
-                      </div>
-                    </>
-                  );
-                })()}
+                <div className="mt-4">
+                  <button
+                    className="inline-flex items-center px-3 py-2 bg-primary text-white rounded-md text-sm hover:opacity-95"
+                    onClick={() => {
+                      // send a simple subscribe payload to Telegram if available
+                      const payload = JSON.stringify({
+                        action: "subscribe",
+                        topic: "blog:new_posts",
+                        user_id: user.id,
+                      });
+                      try {
+                        sendData(payload);
+                      } catch {
+                        // noop
+                      }
+                    }}
+                  >
+                    Subscribe to new blog notifications
+                  </button>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    We will send a notification to your Telegram when new posts
+                    go live.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
