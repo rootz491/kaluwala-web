@@ -111,8 +111,7 @@ export function AuthorPage({
 
         <Separator />
 
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Articles by {author.name}</h2>
+        <div className="space-y-6 pb-10">
           {authorPosts.length > 0 ? (
             <PostsGrid posts={authorPosts} />
           ) : (
