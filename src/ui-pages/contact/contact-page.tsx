@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Heading, Text } from "@/components/ui/typography";
 import contactContent from "@/data/contact-content.json";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin } from "lucide-react";
 
 export function ContactPage() {
   const { hero, contactInfo, directions, contactForm } = contactContent;
@@ -44,24 +44,6 @@ export function ContactPage() {
                             {line}
                           </Text>
                         ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Phone */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Phone className="h-5 w-5" />
-                        {contactInfo.phone.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-1">
-                        <Text>{contactInfo.phone.primary}</Text>
-                        <Text variant="muted">
-                          {contactInfo.phone.secondary}
-                        </Text>
                       </div>
                     </CardContent>
                   </Card>

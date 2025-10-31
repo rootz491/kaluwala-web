@@ -37,9 +37,10 @@ export function NewsPage() {
 
                   <div className="prose prose-lg max-w-none">
                     <Text>
-                      Welcome to Kaluwala's news section! We're working hard to
-                      find something newsworthy to report from our serene
-                      village. So far, the most exciting developments include:
+                      Welcome to Kaluwala&apos;s news section! We&apos;re
+                      working hard to find something newsworthy to report from
+                      our serene village. So far, the most exciting developments
+                      include:
                     </Text>
                   </div>
 
@@ -105,8 +106,8 @@ export function NewsPage() {
                 <CardContent className="text-center space-y-4">
                   <Text>
                     When something genuinely newsworthy happens in Kaluwala,
-                    you'll be the first to know. Until then, enjoy the peaceful
-                    tranquility of our little village.
+                    you&apos;ll be the first to know. Until then, enjoy the
+                    peaceful tranquility of our little village.
                   </Text>
                 </CardContent>
               </Card>

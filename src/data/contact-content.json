@@ -13,11 +13,6 @@
         "PIN: 248140"
       ]
     },
-    "phone": {
-      "title": "Call Us",
-      "primary": "+91 9876543210",
-      "secondary": "+91 9876543211"
-    },
     "email": {
       "title": "Email Us",
       "general": "hello@kaluwala.in",
@@ -36,14 +31,14 @@
     "routes": [
       {
         "from": "Dehradun",
-        "distance": "85 km",
-        "duration": "2.5 hours",
+        "distance": "25 km",
+        "duration": "1 hour",
         "description": "Take NH-7 towards Rishikesh, then follow signs to Kaluwala via Jollygrant."
       },
       {
         "from": "Rishikesh",
-        "distance": "15 km",
-        "duration": "45 minutes",
+        "distance": "22 km",
+        "duration": "35 minutes",
         "description": "Take the Rishikesh-Dehradun road, continue to Ranipokri and then to Kaluwala."
       }
     ]
