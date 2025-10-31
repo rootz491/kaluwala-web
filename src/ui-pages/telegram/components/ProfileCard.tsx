@@ -24,34 +24,15 @@ export default function ProfileCard({ user, tg, sendData }: Props) {
       user: tg?.initDataUnsafe?.user ?? user ?? null,
       ts: Date.now(),
     } as const;
-
     const payload = JSON.stringify(payloadObj);
-
-    const endpoint =
-      (process.env.NEXT_PUBLIC_TELEGRAM_SUBSCRIBE_ENDPOINT as string) ||
-      "/api/telegram/subscribe";
-    try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: payload,
-      });
-      if (!res.ok) throw new Error("bad response");
-    } catch (err) {
-      try {
-        sendData(payload);
-        setStatus("ok");
-        return;
-      } catch {
-        setStatus("error");
-        return;
-      }
-    }
 
     try {
       sendData(payload);
-    } catch {
-      // ignore
+      setStatus("ok");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      return;
     }
 
     setStatus("ok");
