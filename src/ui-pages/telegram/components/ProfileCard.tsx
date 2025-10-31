@@ -56,8 +56,8 @@ export default function ProfileCard({ user, sendData }: Props) {
             onClick={() => {
               const payload = JSON.stringify({
                 action: "subscribe",
-                topic: "blog:new_posts",
-                user_id: user?.id,
+                source: "webapp",
+                ts: Date.now(),
               });
               try {
                 sendData(payload);
@@ -69,8 +69,7 @@ export default function ProfileCard({ user, sendData }: Props) {
             Subscribe to new blog notifications
           </button>
           <p className="text-xs text-muted-foreground mt-2">
-            We will send a notification to your Telegram when new posts go live
-            (demo button — requires Telegram WebApp support).
+            We will send a notification to your Telegram when new posts go live.
           </p>
         </div>
       </div>
