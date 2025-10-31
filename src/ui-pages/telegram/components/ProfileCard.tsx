@@ -7,10 +7,9 @@ import { useState } from "react";
 interface Props {
   user: TelegramUser | null;
   tg: TelegramWebApp | null;
-  sendData: (data: string) => void;
 }
 
-export default function ProfileCard({ user, tg, sendData }: Props) {
+export default function ProfileCard({ user, tg }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
     "idle"
   );
@@ -27,15 +26,16 @@ export default function ProfileCard({ user, tg, sendData }: Props) {
     const payload = JSON.stringify(payloadObj);
 
     try {
-      sendData(payload);
-      setStatus("ok");
+      if (tg?.sendData) {
+        tg?.sendData?.(payload);
+        setStatus("ok");
+      } else {
+        setStatus("error");
+      }
     } catch (err) {
       console.error(err);
       setStatus("error");
-      return;
     }
-
-    setStatus("ok");
   };
 
   return (
