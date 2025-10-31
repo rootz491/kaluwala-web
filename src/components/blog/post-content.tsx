@@ -53,6 +53,11 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
       : urlFor(post.author.image).url()
     : null;
 
+  const authorSlug =
+    typeof post.author?.slug === "string"
+      ? post.author?.slug
+      : post.author?.slug?.current;
+
   return (
     <article className="max-w-4xl mx-auto">
       <div className="mb-8">
@@ -65,13 +70,24 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
 
         <div className="space-y-6">
           <div className="flex flex-wrap gap-2">
-            {post.categories?.map((category) => (
-              <Badge key={category._id} variant="secondary">
-                <Link href={`/blog/category/${category.slug?.current}`}>
-                  {category.title}
-                </Link>
-              </Badge>
-            ))}
+            {post.categories?.map((category) => {
+              const catSlug =
+                typeof category.slug === "string"
+                  ? category.slug
+                  : category.slug?.current;
+
+              return (
+                <Badge key={category._id} variant="secondary">
+                  {catSlug ? (
+                    <Link href={`/blog/category/${catSlug}`}>
+                      {category.title}
+                    </Link>
+                  ) : (
+                    <span>{category.title}</span>
+                  )}
+                </Badge>
+              );
+            })}
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl leading-tight">
@@ -96,14 +112,15 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
               </Avatar>
               <div>
                 <p className="font-medium">
-                  {post.author && (
-                    <Link
-                      href={`/blog/author/${post.author?.slug}`}
-                      className="hover:text-primary transition-colors"
-                    >
-                      {post.author.name}
-                    </Link>
-                  )}
+                  {post.author &&
+                    ((authorSlug && (
+                      <Link
+                        href={`/blog/author/${authorSlug}`}
+                        className="hover:text-primary transition-colors"
+                      >
+                        {post.author.name}
+                      </Link>
+                    )) || <span>{post.author.name}</span>)}
                 </p>
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                   <div className="flex items-center space-x-1">
@@ -141,12 +158,14 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-2">About the Author</h3>
               <h4 className="font-medium mb-2">
-                <Link
-                  href={`/blog/author/${post.author.slug?.current}`}
-                  className="hover:text-primary transition-colors"
-                >
-                  {post.author.name}
-                </Link>
+                {(authorSlug && (
+                  <Link
+                    href={`/blog/author/${authorSlug}`}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {post.author.name}
+                  </Link>
+                )) || <span>{post.author.name}</span>}
               </h4>
               <div className="text-muted-foreground prose prose-sm">
                 <PortableTextRenderer content={post.author.bio} />

@@ -23,6 +23,12 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
       .toUpperCase();
   };
 
+  const resolveSlug = (
+    s: string | { current?: string } | null | undefined
+  ): string | undefined => {
+    return typeof s === "string" ? s : s?.current;
+  };
+
   if (variant === "featured") {
     return (
       <Card className="overflow-hidden">
@@ -46,7 +52,10 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         <CardContent className="p-6">
           <div className="flex flex-wrap gap-2 mb-4">
             {post.categories?.map((category) => (
-              <Badge key={category.slug?.current} variant="secondary">
+              <Badge
+                key={resolveSlug(category.slug) || category._id}
+                variant="secondary"
+              >
                 {category.title}
               </Badge>
             ))}
@@ -106,7 +115,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           <div className="flex flex-wrap gap-1 mb-2">
             {post.categories?.slice(0, 2).map((category) => (
               <Badge
-                key={category.slug?.current}
+                key={resolveSlug(category.slug) || category._id}
                 variant="outline"
                 className="text-xs"
               >
@@ -174,7 +183,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
                     <div className="flex flex-wrap gap-1">
                       {post.categories.slice(0, 2).map((category) => (
                         <Badge
-                          key={category.slug?.current}
+                          key={resolveSlug(category.slug) || category._id}
                           variant="secondary"
                           className="text-xs bg-white/90 text-black"
                         >
@@ -213,7 +222,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
                   <div className="flex flex-wrap gap-1 justify-center mb-2">
                     {post.categories.slice(0, 2).map((category) => (
                       <Badge
-                        key={category.slug?.current}
+                        key={resolveSlug(category.slug) || category._id}
                         variant="secondary"
                         className="text-xs"
                       >
