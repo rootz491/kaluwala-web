@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Accept flexible incoming shapes from the client
 type Body = Record<string, unknown>;
-
-const FORWARD_URL =
-  "https://kaluwala-telegram.karansh491.workers.dev/subscribe";
 
 export async function POST(req: Request) {
   try {
@@ -37,13 +33,21 @@ export async function POST(req: Request) {
       );
     }
 
+    const forwardUrl = process.env.WORKER_SUBSCRIBE_URL;
+    if (!forwardUrl) {
+      return NextResponse.json(
+        { error: "Server not configured (missing WORKER_SUBSCRIBE_URL)" },
+        { status: 500 }
+      );
+    }
+
     const payload = {
       telegram_id,
       first_name: first_name ?? null,
       username: username ?? null,
     };
 
-    const resp = await fetch(FORWARD_URL, {
+    const resp = await fetch(`${forwardUrl}/subscribe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
