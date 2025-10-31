@@ -1,13 +1,14 @@
-import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
+import { getAllCategories, getAllPosts, getAllAuthors } from "@/lib/blog-api-new";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kaluwala.in";
 
-  // Get all posts and categories
-  const [posts, categories] = await Promise.all([
+  // Get all posts, categories and authors
+  const [posts, categories, authors] = await Promise.all([
     getAllPosts(),
     getAllCategories(),
+    getAllAuthors(),
   ]);
 
   // Static pages
@@ -64,5 +65,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-  return [...staticPages, ...postPages, ...categoryPages];
+  // Author pages
+  const authorPages: MetadataRoute.Sitemap = (authors || [])
+    .filter((author) => author.slug?.current)
+    .map((author) => ({
+      url: `${baseUrl}/blog/author/${author.slug?.current}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+
+  // Additional top-level static pages
+  const extraStatic: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/news`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/support`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
+  ];
+
+  return [...staticPages, ...postPages, ...categoryPages, ...authorPages, ...extraStatic];
 }
