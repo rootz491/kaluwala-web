@@ -1,5 +1,6 @@
 import { AdSenseScript } from "@/components/adsense";
 import { StructuredData } from "@/components/seo/structured-data";
+import TelegramProvider from "@/context/telegram-context";
 import { generateSEOMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -41,9 +42,11 @@ export default function RootLayout({
               "A modern web development company specializing in Next.js, React, and modern web technologies.",
           }}
         />
-        <div className="relative flex min-h-screen flex-col">
-          <main className="flex-1">{children}</main>
-        </div>
+        <TelegramProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <main className="flex-1">{children}</main>
+          </div>
+        </TelegramProvider>
       </body>
     </html>
   );

@@ -1,12 +1,6 @@
+import TelegramLink from "@/components/telegram/TelegramLink";
 import homepageContent from "@/data/homepage-content.json";
-import { Instagram, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
-
-const socialIcons = {
-  instagram: Instagram,
-  linkedin: Linkedin,
-  twitter: Twitter,
-};
 
 export function SiteFooter() {
   const { footer } = homepageContent;
@@ -37,6 +31,8 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              {/* Telegram link will render only when the WebApp is available (client-side) */}
+              <TelegramLink />
             </ul>
           </div>
 
