@@ -3,7 +3,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { urlFor } from "@/lib/sanity";
 import { BlogPost, Post } from "@/types/sanity";
 import { ArrowLeft, Calendar, Share2 } from "lucide-react";
@@ -129,8 +128,6 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
       <div className="prose prose-lg max-w-none">
         {post.body && <PortableTextRenderer content={post.body} />}
       </div>
-
-      <Separator className="my-12" />
 
       {post.author?.bio && (
         <div className="bg-muted/30 rounded-lg p-6 mb-12">

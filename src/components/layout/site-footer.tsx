@@ -22,21 +22,6 @@ export function SiteFooter() {
             <p className="text-muted-foreground max-w-md">
               {footer.description}
             </p>
-            <div className="flex gap-4 pt-4">
-              {footer.social.map((item) => {
-                const Icon = socialIcons[item.icon as keyof typeof socialIcons];
-                return (
-                  <Link
-                    key={item.platform}
-                    href={item.href}
-                    className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label={item.platform}
-                  >
-                    <Icon size={20} />
-                  </Link>
-                );
-              })}
-            </div>
           </div>
 
           <div className="space-y-4">

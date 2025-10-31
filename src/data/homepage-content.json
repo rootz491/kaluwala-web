@@ -42,7 +42,6 @@
     "navigation": {
       "explore": [
         { "label": "Blog", "href": "/blog" },
-        { "label": "Culture", "href": "/culture" },
         { "label": "News", "href": "/news" }
       ],
       "support": [
@@ -50,24 +49,7 @@
         { "label": "Support", "href": "/support" },
         { "label": "Legal", "href": "/legal" }
       ]
-    },
-    "social": [
-      {
-        "platform": "Instagram",
-        "href": "https://instagram.com/kaluwala",
-        "icon": "instagram"
-      },
-      {
-        "platform": "LinkedIn",
-        "href": "https://linkedin.com/company/kaluwala",
-        "icon": "linkedin"
-      },
-      {
-        "platform": "Twitter",
-        "href": "https://twitter.com/kaluwala",
-        "icon": "twitter"
-      }
-    ]
+    }
   },
   "seo": {
     "title": "Kaluwala - A Hidden Sanctuary in Uttarakhand",
