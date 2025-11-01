@@ -33,10 +33,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const forwardUrl = process.env.WORKER_SUBSCRIBE_URL;
+    const forwardUrl = process.env.HTTP_ENDPOINT;
     if (!forwardUrl) {
       return NextResponse.json(
-        { error: "Server not configured (missing WORKER_SUBSCRIBE_URL)" },
+        { error: "Server not configured (missing HTTP_ENDPOINT)" },
         { status: 500 }
       );
     }
