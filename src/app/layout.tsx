@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Kaluwala Web",
+  title: "Kaluwala: A Peaceful Village Near Dehradun, Uttarakhand",
   description:
-    "A modern web application built with Next.js, Sanity CMS, Tailwind CSS, and shadcn/ui",
+    "Discover Kaluwala, a hidden sanctuary near Dehradun. Surrounded by forests and mountains, our village offers a perfect escape from the noise.",
   type: "website",
 });
 
