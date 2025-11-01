@@ -1,4 +1,4 @@
-import { getAllCategories } from "@/lib/blog-api-new";
+import { getAllCategories } from "@/lib/blog-api";
 import { BlogSearchPage } from "@/ui-pages";
 
 export default async function SearchPage() {

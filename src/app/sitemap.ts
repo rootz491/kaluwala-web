@@ -1,4 +1,4 @@
-import { getAllCategories, getAllPosts, getAllAuthors } from "@/lib/blog-api-new";
+import { getAllAuthors, getAllCategories, getAllPosts } from "@/lib/blog-api";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -97,5 +97,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticPages, ...postPages, ...categoryPages, ...authorPages, ...extraStatic];
+  return [
+    ...staticPages,
+    ...postPages,
+    ...categoryPages,
+    ...authorPages,
+    ...extraStatic,
+  ];
 }

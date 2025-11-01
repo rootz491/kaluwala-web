@@ -1,4 +1,4 @@
-import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api";
 import { AllPostsPage } from "@/ui-pages";
 import { Metadata } from "next";
 

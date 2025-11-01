@@ -1,9 +1,5 @@
 import { StructuredData } from "@/components/seo/structured-data";
-import {
-  getAllCategories,
-  getAllPosts,
-  getAuthorBySlug,
-} from "@/lib/blog-api-new";
+import { getAllCategories, getAllPosts, getAuthorBySlug } from "@/lib/blog-api";
 import { generateAuthorMetadata } from "@/lib/seo";
 import { AuthorPage } from "@/ui-pages";
 import { Metadata } from "next";

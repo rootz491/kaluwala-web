@@ -1,5 +1,5 @@
 import { StructuredData } from "@/components/seo";
-import { getAllCategories, getAllPosts } from "@/lib/blog-api-new";
+import { getAllCategories, getAllPosts } from "@/lib/blog-api";
 import { generateSEOMetadata } from "@/lib/seo";
 import { BlogPage } from "@/ui-pages";
 import { Metadata } from "next";
