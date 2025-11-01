@@ -9,6 +9,9 @@ import { BlogPostPage } from "@/ui-pages";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// Enable ISR: revalidate every 1 hour (3600 seconds)
+export const revalidate = 3600;
+
 interface BlogPostPageProps {
   params: {
     slug: string;

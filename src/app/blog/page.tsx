@@ -4,6 +4,9 @@ import { generateSEOMetadata } from "@/lib/seo";
 import { BlogPage } from "@/ui-pages";
 import { Metadata } from "next";
 
+// Enable ISR: revalidate every 1 hour (3600 seconds)
+export const revalidate = 3600;
+
 export const metadata: Metadata = generateSEOMetadata({
   title: "Blog | Kaluwala",
   description:
