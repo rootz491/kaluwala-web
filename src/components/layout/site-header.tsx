@@ -32,6 +32,9 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
           Kaluwala
         </Link>
         <div className="flex gap-6 md:gap-8">
+          <Link href="/gallery" className={linkClasses}>
+            Gallery
+          </Link>
           <Link href="/blog" className={linkClasses}>
             Blogs
           </Link>
