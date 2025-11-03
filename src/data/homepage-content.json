@@ -43,6 +43,7 @@
       "explore": [
         { "label": "Blog", "href": "/blog" },
         { "label": "News", "href": "/news" },
+        { "label": "Gallery", "href": "/gallery" },
         { "label": "Telegram", "href": "/telegram" }
       ],
       "support": [
