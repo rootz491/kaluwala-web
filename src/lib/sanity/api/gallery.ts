@@ -62,6 +62,7 @@ export async function getGalleryItems(
         telegramId,
         username,
         name,
+        status,
         createdAt
       }`;
 
