@@ -110,6 +110,16 @@ export interface Tag extends SanityDocument {
   } | null;
 }
 
+export interface GalleryDocument extends SanityDocument {
+  _type: "gallery";
+  image: SanityImage;
+  telegramId: string;
+  username?: string;
+  name?: string;
+  status: "pending" | "approved" | "rejected";
+  createdAt: string;
+}
+
 export interface BlogPostAuthor {
   name: string;
   slug: string; // This is resolved to a string in BLOG_POST_FIELDS
