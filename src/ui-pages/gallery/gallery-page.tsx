@@ -3,6 +3,7 @@
 import { GalleryGrid, GalleryPagination } from "@/components/gallery";
 import { GalleryDocument } from "@/types/sanity";
 import { useCallback, useState } from "react";
+import BackButton from "../../components/ui/BackButton";
 
 interface GalleryPageProps {
   initialData: {
@@ -53,6 +54,7 @@ export function GalleryPage({ initialData }: GalleryPageProps) {
     <section className="py-12 md:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="mb-8">
+          <BackButton />
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Gallery</h1>
           <p className="text-muted-foreground">
             Discover beautiful moments from our community

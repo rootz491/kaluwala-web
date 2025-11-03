@@ -3,6 +3,8 @@
 import { urlFor } from "@/lib/sanity";
 import { GalleryDocument } from "@/types/sanity";
 import Image from "next/image";
+import { useState } from "react";
+import { ImageModal } from "./image-modal";
 
 interface GalleryGridProps {
   items: GalleryDocument[];
@@ -10,6 +12,9 @@ interface GalleryGridProps {
 }
 
 export function GalleryGrid({ items, isLoading = false }: GalleryGridProps) {
+  const [selectedImage, setSelectedImage] = useState<GalleryDocument | null>(
+    null
+  );
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -36,23 +41,45 @@ export function GalleryGrid({ items, isLoading = false }: GalleryGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {items.map((item) => (
-        <GalleryCard key={item._id} item={item} />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((item) => (
+          <GalleryCard
+            key={item._id}
+            item={item}
+            onImageClick={setSelectedImage}
+          />
+        ))}
+      </div>
+
+      {selectedImage && (
+        <ImageModal
+          imageUrl={urlFor(selectedImage.image).url()}
+          alt={
+            selectedImage.name ||
+            `Gallery image by ${selectedImage.username || "Unknown"}`
+          }
+          isOpen={!!selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
+    </>
   );
 }
 
 interface GalleryCardProps {
   item: GalleryDocument;
+  onImageClick: (item: GalleryDocument) => void;
 }
 
-function GalleryCard({ item }: GalleryCardProps) {
+function GalleryCard({ item, onImageClick }: GalleryCardProps) {
   const imageUrl = urlFor(item.image).url();
 
   return (
-    <div className="group relative overflow-hidden rounded-lg bg-muted aspect-square">
+    <div
+      className="group relative overflow-hidden rounded-lg bg-muted aspect-square cursor-pointer"
+      onClick={() => onImageClick(item)}
+    >
       <Image
         src={imageUrl}
         alt={item.name || `Gallery image by ${item.username || "Unknown"}`}

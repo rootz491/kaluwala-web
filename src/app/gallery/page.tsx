@@ -4,7 +4,6 @@ import { generateSEOMetadata } from "@/lib/seo";
 import { GalleryPage } from "@/ui-pages/gallery";
 import { Metadata } from "next";
 
-// Enable ISR: revalidate every 1 hour (3600 seconds)
 export const revalidate = 3600;
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -18,7 +17,6 @@ const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 12;
 
 export default async function GalleryPageRoute() {
-  // Fetch initial data server-side
   const initialData = await getGalleryItems(DEFAULT_PAGE, DEFAULT_LIMIT);
 
   const structuredData = {

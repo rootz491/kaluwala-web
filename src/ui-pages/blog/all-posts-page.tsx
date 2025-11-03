@@ -1,5 +1,5 @@
-import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostsGrid } from "@/components/blog/posts-grid";
+import { LowerLayout } from "@/components/layout/lower-layout";
 import { Button } from "@/components/ui/button";
 import { BlogPost, Category } from "@/types/sanity";
 import { ArrowLeft } from "lucide-react";
@@ -12,7 +12,7 @@ interface AllPostsPageProps {
 
 export function AllPostsPage({ posts, categories }: AllPostsPageProps) {
   return (
-    <BlogLayout categories={categories} recentPosts={posts.slice(0, 5)}>
+    <LowerLayout categories={categories} recentPosts={posts.slice(0, 5)}>
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <div>
@@ -33,6 +33,6 @@ export function AllPostsPage({ posts, categories }: AllPostsPageProps) {
 
         <PostsGrid posts={posts} />
       </div>
-    </BlogLayout>
+    </LowerLayout>
   );
 }

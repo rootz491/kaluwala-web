@@ -1,7 +1,7 @@
 "use client";
 
 import useTelegram from "@/hooks/useTelegram";
-import BackButton from "./components/BackButton";
+import BackButton from "../../components/ui/BackButton";
 import OpenInTelegramInfo from "./components/OpenInTelegramInfo";
 import ProfileCard from "./components/ProfileCard";
 

@@ -1,5 +1,5 @@
-import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostContent } from "@/components/blog/post-content";
+import { LowerLayout } from "@/components/layout/lower-layout";
 import { BlogPost, Category, Post } from "@/types/sanity";
 
 interface BlogPostPageProps {
@@ -14,8 +14,8 @@ export function BlogPostPage({
   recentPosts,
 }: BlogPostPageProps) {
   return (
-    <BlogLayout categories={categories} recentPosts={recentPosts}>
+    <LowerLayout categories={categories} recentPosts={recentPosts}>
       <PostContent post={post} />
-    </BlogLayout>
+    </LowerLayout>
   );
 }

@@ -1,6 +1,6 @@
-import { BlogLayout } from "@/components/blog/blog-layout";
 import { PortableTextRenderer } from "@/components/blog/portable-text";
 import { PostsGrid } from "@/components/blog/posts-grid";
+import { LowerLayout } from "@/components/layout/lower-layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -33,7 +33,7 @@ export function AuthorPage({
     typeof author.image === "string" ? author.image : author.image?.asset?.url;
 
   return (
-    <BlogLayout categories={categories} recentPosts={recentPosts}>
+    <LowerLayout categories={categories} recentPosts={recentPosts}>
       <div className="space-y-8">
         <Button variant="ghost" asChild className="mb-6">
           <Link href="/blog" className="inline-flex items-center">
@@ -123,6 +123,6 @@ export function AuthorPage({
           )}
         </div>
       </div>
-    </BlogLayout>
+    </LowerLayout>
   );
 }

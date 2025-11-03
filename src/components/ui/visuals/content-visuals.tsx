@@ -1,7 +1,3 @@
-import homepageContent from "@/data/homepage-content.json";
-
-const { sections } = homepageContent;
-
 export function ForestVisual() {
   return (
     <div className="w-full h-full rounded-lg overflow-hidden">

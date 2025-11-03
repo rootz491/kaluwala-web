@@ -1,7 +1,7 @@
 "use client";
 
-import { BlogLayout } from "@/components/blog/blog-layout";
 import { PostsGrid } from "@/components/blog/posts-grid";
+import { LowerLayout } from "@/components/layout/lower-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { searchPosts } from "@/lib/blog-api";
@@ -56,7 +56,7 @@ function SearchComponent({ categories }: SearchPageProps) {
   };
 
   return (
-    <BlogLayout categories={categories} recentPosts={[]}>
+    <LowerLayout categories={categories} recentPosts={[]}>
       <div className="space-y-8">
         <div className="text-center space-y-4 py-8">
           <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
@@ -103,7 +103,7 @@ function SearchComponent({ categories }: SearchPageProps) {
           </div>
         )}
       </div>
-    </BlogLayout>
+    </LowerLayout>
   );
 }
 
