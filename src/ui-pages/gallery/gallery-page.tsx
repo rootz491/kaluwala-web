@@ -1,8 +1,9 @@
 "use client";
 
-import { GalleryGrid, GalleryPagination } from "@/components/gallery";
+import { GalleryGrid } from "@/components/gallery";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { GalleryDocument } from "@/types/sanity";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import BackButton from "../../components/ui/BackButton";
 
 interface GalleryPageProps {
@@ -17,38 +18,50 @@ interface GalleryPageProps {
 }
 
 export function GalleryPage({ initialData }: GalleryPageProps) {
-  const [data, setData] = useState(initialData);
+  const [allItems, setAllItems] = useState<GalleryDocument[]>(
+    initialData.items
+  );
+  const [currentPage, setCurrentPage] = useState(initialData.page);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(initialData.hasNext);
+  const limitRef = useRef(initialData.limit);
 
-  const handlePageChange = useCallback(
-    async (newPage: number) => {
-      setIsLoading(true);
-      setError(null);
+  const handleLoadMore = useCallback(async () => {
+    if (isLoading || !hasMore) return;
 
-      try {
-        const response = await fetch(
-          `/api/gallery?page=${newPage}&limit=${data.limit}`
-        );
+    setIsLoading(true);
+    setError(null);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch gallery items");
-        }
+    try {
+      const nextPage = currentPage + 1;
+      const response = await fetch(
+        `/api/gallery?page=${nextPage}&limit=${limitRef.current}`
+      );
 
-        const newData = await response.json();
-        setData(newData);
-
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (err) {
-        console.error("Error fetching gallery:", err);
-        setError("Failed to load gallery items. Please try again.");
-      } finally {
-        setIsLoading(false);
+      if (!response.ok) {
+        throw new Error("Failed to fetch gallery items");
       }
-    },
-    [data.limit]
-  );
+
+      const newData = await response.json();
+
+      // Append new items to existing items
+      setAllItems((prev) => [...prev, ...newData.items]);
+      setCurrentPage(nextPage);
+      setHasMore(newData.hasNext);
+    } catch (err) {
+      console.error("Error fetching gallery:", err);
+      setError("Failed to load more items. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentPage, isLoading, hasMore]);
+
+  const scrollTarget = useInfiniteScroll({
+    onLoadMore: handleLoadMore,
+    isLoading,
+    hasMore,
+  });
 
   return (
     <section className="py-12 md:py-16 lg:py-20">
@@ -67,17 +80,35 @@ export function GalleryPage({ initialData }: GalleryPageProps) {
           </div>
         )}
 
-        <GalleryGrid items={data.items} isLoading={isLoading} />
+        <GalleryGrid items={allItems} isLoading={false} />
 
-        <GalleryPagination
-          page={data.page}
-          total={data.total}
-          limit={data.limit}
-          hasNext={data.hasNext}
-          hasPrev={data.hasPrev}
-          onPageChange={handlePageChange}
-          isLoading={isLoading}
-        />
+        {/* Infinite scroll trigger target */}
+        {hasMore && (
+          <div
+            ref={scrollTarget}
+            className="flex items-center justify-center py-8 mt-8"
+          >
+            {isLoading && (
+              <div className="flex flex-col items-center gap-2">
+                <div className="animate-spin">
+                  <div className="w-8 h-8 border-4 border-muted border-t-primary rounded-full" />
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Loading more images...
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* End of gallery message */}
+        {!hasMore && allItems.length > 0 && (
+          <div className="flex items-center justify-center py-8 mt-8">
+            <p className="text-sm text-muted-foreground">
+              You&apos;ve reached the end of the gallery
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
