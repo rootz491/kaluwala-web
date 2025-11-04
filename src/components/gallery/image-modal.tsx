@@ -7,6 +7,8 @@ import { useEffect } from "react";
 interface ImageModalProps {
   imageUrl: string;
   alt: string;
+  firstName?: string;
+  username?: string;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -14,6 +16,8 @@ interface ImageModalProps {
 export function ImageModal({
   imageUrl,
   alt,
+  firstName,
+  username,
   isOpen,
   onClose,
 }: ImageModalProps) {
@@ -70,6 +74,14 @@ export function ImageModal({
               priority
             />
           </div>
+
+          {/* Info below image */}
+          {(firstName || username) && (
+            <div className="absolute bottom-4 left-4 right-4 md:hidden bg-black/60 backdrop-blur-sm rounded-lg p-3 text-white">
+              {firstName && <p className="font-medium text-sm">{firstName}</p>}
+              {username && <p className="text-xs text-gray-300">@{username}</p>}
+            </div>
+          )}
         </div>
       </div>
     </>

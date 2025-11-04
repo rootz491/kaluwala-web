@@ -56,9 +56,11 @@ export function GalleryGrid({ items, isLoading = false }: GalleryGridProps) {
         <ImageModal
           imageUrl={urlFor(selectedImage.image).url()}
           alt={
-            selectedImage.name ||
+            selectedImage.firstName ||
             `Gallery image by ${selectedImage.username || "Unknown"}`
           }
+          firstName={selectedImage.firstName}
+          username={selectedImage.username}
           isOpen={!!selectedImage}
           onClose={() => setSelectedImage(null)}
         />
@@ -82,7 +84,7 @@ function GalleryCard({ item, onImageClick }: GalleryCardProps) {
     >
       <Image
         src={imageUrl}
-        alt={item.name || `Gallery image by ${item.username || "Unknown"}`}
+        alt={item.firstName || `Gallery image by ${item.username || "Unknown"}`}
         fill
         className="object-cover transition-transform duration-300 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -91,8 +93,10 @@ function GalleryCard({ item, onImageClick }: GalleryCardProps) {
       {/* Hover overlay with info */}
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex flex-col items-center justify-end p-4 opacity-0 group-hover:opacity-100">
         <div className="text-white text-center">
-          {item.name && (
-            <p className="font-medium text-sm truncate w-full">{item.name}</p>
+          {item.firstName && (
+            <p className="font-medium text-sm truncate w-full">
+              {item.firstName}
+            </p>
           )}
           {item.username && (
             <p className="text-xs text-gray-300">@{item.username}</p>

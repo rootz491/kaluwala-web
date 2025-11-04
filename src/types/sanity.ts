@@ -115,9 +115,9 @@ export interface GalleryDocument extends SanityDocument {
   image: SanityImage;
   telegramId: string;
   username?: string;
-  name?: string;
+  firstName?: string;
   status: "pending" | "approved" | "rejected";
-  createdAt: string;
+  uploadedAt: string;
 }
 
 export interface BlogPostAuthor {

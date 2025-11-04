@@ -32,12 +32,12 @@ export async function getGalleryItems(
 
     // Fetch paginated items
     const query = `*[_type == "gallery" && status == "approved"]
-      | order(createdAt desc)
+      | order(uploadedAt desc)
       [${offset}...${offset + validLimit}]
       {
         _id,
         _type,
-        _createdAt,
+        _uploadedAt,
         _updatedAt,
         _rev,
         image {
@@ -61,9 +61,9 @@ export async function getGalleryItems(
         },
         telegramId,
         username,
-        name,
+        firstName,
         status,
-        createdAt
+        uploadedAt
       }`;
 
     const items = await client.fetch<GalleryDocument[]>(query);
@@ -96,7 +96,7 @@ export async function getGalleryItemById(
     const query = `*[_type == "gallery" && _id == $id][0] {
       _id,
       _type,
-      _createdAt,
+      _uploadedAt,
       _updatedAt,
       _rev,
       image {
@@ -120,8 +120,8 @@ export async function getGalleryItemById(
       },
       telegramId,
       username,
-      name,
-      createdAt
+      firstName,
+      uploadedAt
     }`;
 
     const item = await client.fetch<GalleryDocument | null>(query, { id });
