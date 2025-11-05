@@ -8,6 +8,7 @@ import { BlogPost, Post } from "@/types/sanity";
 import { ArrowLeft, Calendar, Share2 } from "lucide-react";
 import Link from "next/link";
 import { PortableTextRenderer } from "./portable-text";
+import { TelegramDiscussion } from "./telegram-discussion";
 
 interface PostContentProps {
   post: Post;
@@ -174,6 +175,8 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
           </div>
         </div>
       )}
+
+      {post.telegramId && <TelegramDiscussion telegramId={post.telegramId} />}
 
       {relatedPosts.length > 0 && (
         <div className="mt-12">
