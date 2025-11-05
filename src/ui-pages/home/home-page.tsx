@@ -1,13 +1,13 @@
 import { HomeLayout } from "@/components/layout";
 import { ContentSection } from "@/components/ui/content-section";
-import { HeroSection } from "@/components/ui/hero-section";
 import {
-  ButterflyVisual,
   ForestVisual,
   RiverVisual,
   TempleVisual,
 } from "@/components/ui/visuals";
 import homepageContent from "@/data/homepage-content.json";
+import { HeroSection } from "../../components/ui/hero-section";
+import { VillageMap } from "../../components/village-map";
 
 const visualComponents = {
   forest: ForestVisual,
@@ -24,8 +24,21 @@ export function HomePage() {
         <HeroSection
           title={hero.title}
           subtitle={hero.subtitle}
-          visual={<ButterflyVisual />}
+          visual={<VillageMap />}
         />
+
+        {/* Village Map Section */}
+        {/* <section className="py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-muted/30">
+          <div className="max-w-7xl mx-auto text-center mb-6">
+            <div className="space-y-6 order-2 lg:order-1 mb-12">
+              <Heading level={1}>{hero.title}</Heading>
+              <Text variant="large" className="max-w-lg">
+                {hero.subtitle}
+              </Text>
+            </div>
+            <VillageMap />
+          </div>
+        </section> */}
 
         <section className="py-16 md:py-24 px-6 md:px-12 lg:px-16">
           <div className="max-w-7xl mx-auto space-y-16 md:space-y-24">
