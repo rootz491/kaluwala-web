@@ -13,7 +13,7 @@
       "title": "The Forest",
       "description": "Step out your door and into a world of green. The forests of Kaluwala are a living library of Himalayan flora and fauna.",
       "image": {
-        "src": "/images/forest-pattern.jpg",
+        "src": "https://cdn.sanity.io/images/y3tbhcj0/production/76b10f2e080b1fe6c516ebea4f1ac77cd978db2b-1920x2560.jpg?w=1840&q=75",
         "alt": "Abstract forest pattern in earth tones"
       }
     },
@@ -22,7 +22,7 @@
       "title": "The Song River",
       "description": "A short walk leads to the banks of the Song River, its clear waters flowing down from the mountains. It's the perfect spot for a quiet picnic, a moment of reflection, or simply to listen to the music of the water.",
       "image": {
-        "src": "/images/river.jpg",
+        "src": "https://cdn.sanity.io/images/y3tbhcj0/production/328b59c8e20e49d5ee87786258a27897c90d380c-1920x2560.jpg?&w=1840&q=75",
         "alt": "Purple gradient representing flowing river waters"
       }
     },
@@ -31,7 +31,7 @@
       "title": "Kalusidh Temple",
       "description": "Discover the spiritual anchor of our village. The Kalusidh temple is not just a place of worship, but a beacon of peace and local legend that gives Kaluwala its name and its soul.",
       "image": {
-        "src": "/images/temple-mosaic.jpg",
+        "src": "https://cdn.sanity.io/images/y3tbhcj0/production/f14f3b10a8163fefa488bf36615d5d3ea2e213d1-2560x1920.jpg?&w=1840&q=80",
         "alt": "Pixelated mosaic pattern representing the ancient temple"
       }
     }

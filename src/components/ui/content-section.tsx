@@ -1,16 +1,20 @@
 import { Heading, Text } from "@/components/ui/typography";
+import Image from "next/image";
 
 interface ContentSectionProps {
   title: string;
   description: string;
-  visual?: React.ReactNode;
+  image: {
+    src: string;
+    alt: string;
+  };
   reverse?: boolean;
 }
 
 export function ContentSection({
   title,
   description,
-  visual,
+  image,
   reverse = false,
 }: ContentSectionProps) {
   return (
@@ -23,13 +27,19 @@ export function ContentSection({
         <Heading level={2}>{title}</Heading>
         <Text>{description}</Text>
       </div>
-      {visual && (
+      {image && (
         <div
-          className={`relative aspect-square max-w-sm sm:max-w-md mx-auto lg:max-w-none ${
+          className={`relative aspect-square max-w-sm sm:max-w-md mx-auto lg:max-w-none rounded-3xl overflow-hidden ${
             reverse ? "lg:col-start-1 lg:row-start-1" : ""
           }`}
         >
-          {visual}
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
       )}
     </div>
