@@ -4,61 +4,65 @@ import { useEffect } from "react";
 
 interface TelegramDiscussionProps {
   telegramId: string;
+  postSlug?: string;
+  commentsLimit?: number;
+  colorful?: boolean;
 }
 
 /**
  * Telegram Discussion Widget Component
- * Embeds a Telegram discussion/topic widget for blog posts
- * Requires telegramId in format: "channelId/topicId"
+ * Embeds the official Telegram discussion widget
+ *
+ * How it works:
+ * 1. If using topicId format: Embeds discussions from a specific Telegram topic
+ * 2. If using channel link format: Shows all discussions from that channel
+ *    (discussions are matched to this page via canonical URL)
+ *
+ * For channel-based discussions to work:
+ * - Your Telegram channel must post links to your blog articles
+ * - The page must have a canonical URL in the <head>
+ * - Next.js automatically adds this via metadata.alternates.canonical
+ * - Telegram widget will show discussions posted for this URL
+ *
+ * @param telegramId - Telegram discussion ID (topicId format: "channel/123")
+ *                     or channel link format: "@channelname"
+ * @param postSlug - Blog post slug (for reference, not used by widget)
+ * @param commentsLimit - Maximum number of comments to display (default: 5)
+ * @param colorful - Use colorful theme (default: true)
  */
-export function TelegramDiscussion({ telegramId }: TelegramDiscussionProps) {
+export function TelegramDiscussion({
+  telegramId,
+  postSlug,
+  commentsLimit = 5,
+  colorful = true,
+}: TelegramDiscussionProps) {
   useEffect(() => {
-    // Load Telegram widget script
+    // Load or reload the Telegram widget
+    // This script will process data-telegram-discussion attributes
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-widget.js?22";
     script.async = true;
     script.defer = true;
 
-    // Find the telegram discussion container and append script
-    const container = document.getElementById("telegram-discussion-container");
-    if (container) {
-      container.appendChild(script);
-    }
+    // Append to body
+    document.body.appendChild(script);
 
     return () => {
-      // Cleanup: remove script on unmount
-      const existingScript = document.getElementById("telegram-widget-script");
-      if (existingScript) {
-        existingScript.remove();
-      }
+      // Cleanup is handled by Telegram widget
     };
   }, [telegramId]);
 
-  // telegramId format should be: "channelId/topicId" or "@channelHandle/topicId"
-  const telegramDiscussionUrl = `https://t.me/kaluwaladiscussions/${telegramId}`;
-
   return (
-    <div id="telegram-discussion-container" className="my-8">
-      <div className="rounded-lg border border-border bg-card p-6">
-        <h3 className="text-lg font-semibold mb-4">Join the Discussion</h3>
+    <div id={`telegram-discussion-${postSlug}`} className="my-8">
+      <div className="rounded-lg border border-border bg-card overflow-hidden">
+        {/* Telegram Discussion Widget */}
         <script
-          id="telegram-widget-script"
           async
-          defer
           src="https://telegram.org/js/telegram-widget.js?22"
-          data-telegram-post={telegramId}
-          data-width="100%"
+          data-telegram-discussion={telegramId}
+          data-comments-limit={commentsLimit}
+          data-colorful={colorful ? "1" : "0"}
         />
-        <div className="mt-4 text-center">
-          <a
-            href={telegramDiscussionUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors"
-          >
-            Discuss on Telegram →
-          </a>
-        </div>
       </div>
     </div>
   );

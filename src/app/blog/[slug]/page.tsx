@@ -36,7 +36,17 @@ export async function generateMetadata({
     };
   }
 
-  return generateBlogPostMetadata(post);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kaluwala.in";
+  const canonicalUrl = `${siteUrl}/blog/${slug}`;
+
+  const metadata = generateBlogPostMetadata(post);
+
+  return {
+    ...metadata,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+  };
 }
 
 export default async function BlogPostPageRoute({ params }: BlogPostPageProps) {

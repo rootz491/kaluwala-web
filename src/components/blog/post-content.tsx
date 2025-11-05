@@ -176,7 +176,16 @@ export function PostContent({ post, relatedPosts = [] }: PostContentProps) {
         </div>
       )}
 
-      {post.telegramId && <TelegramDiscussion telegramId={post.telegramId} />}
+      {post.telegramId && (
+        <TelegramDiscussion
+          telegramId={post.telegramId}
+          postSlug={
+            typeof post.slug === "string" ? post.slug : post.slug?.current
+          }
+          commentsLimit={5}
+          colorful={true}
+        />
+      )}
 
       {relatedPosts.length > 0 && (
         <div className="mt-12">
