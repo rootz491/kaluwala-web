@@ -21,6 +21,65 @@ const defaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = defaultIcon;
 
+// Category-specific icons from Icons8
+const categoryIcons: Record<string, L.Icon> = {
+  temple: L.icon({
+    iconUrl:
+      "https://img.icons8.com/?size=96&id=5akoLXg0WREL&format=png&color=AC2626",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  school: L.icon({
+    iconUrl:
+      "https://img.icons8.com/?size=96&id=sNtcuXhW2nYo&format=png&color=2563EB",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  sport: L.icon({
+    iconUrl:
+      "https://img.icons8.com/?size=100&id=Noxc13gYD50M&format=png&color=0000FF",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  restaurant: L.icon({
+    iconUrl: "https://img.icons8.com/?size=96&id=8694&format=png&color=EA580C",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  government: L.icon({
+    iconUrl: "https://img.icons8.com/?size=96&id=20996&format=png&color=7C3AED",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  hospital: L.icon({
+    iconUrl: "https://img.icons8.com/?size=96&id=90920&format=png&color=EC4899",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  market: L.icon({
+    iconUrl: "https://img.icons8.com/?size=96&id=8717&format=png&color=FBBF24",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+  other: L.icon({
+    iconUrl: "https://img.icons8.com/?size=96&id=23262&format=png&color=6B7280",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  }),
+};
+
+const getMarkerIcon = (category: string): L.Icon => {
+  return categoryIcons[category] || defaultIcon;
+};
+
 export default function VillageMapContent({ config }: VillageMapContentProps) {
   const center: LatLngExpression = [config.center.lat, config.center.lng];
 
@@ -63,7 +122,11 @@ export default function VillageMapContent({ config }: VillageMapContentProps) {
         {config.pointsOfInterest &&
           config.pointsOfInterest.length > 0 &&
           config.pointsOfInterest.map((poi, index) => (
-            <Marker key={index} position={[poi.lat, poi.lng]}>
+            <Marker
+              key={index}
+              position={[poi.lat, poi.lng]}
+              icon={getMarkerIcon(poi.category)}
+            >
               <Popup>
                 <div className="space-y-2">
                   <div>
