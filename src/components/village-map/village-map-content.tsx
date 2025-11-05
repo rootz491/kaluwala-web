@@ -56,26 +56,8 @@ export default function VillageMapContent({ config }: VillageMapContentProps) {
                 e.target.setStyle({ fillOpacity: 0.1 });
               },
             }}
-          >
-            <Popup>
-              <p className="font-semibold">Kaluwala Village</p>
-              <p className="text-sm text-muted-foreground">
-                Click to explore the village
-              </p>
-            </Popup>
-          </Polygon>
+          ></Polygon>
         )}
-
-        {/* Village Center Marker */}
-        <Marker position={center}>
-          <Popup>
-            <p className="font-semibold">Kaluwala Village Center</p>
-            <p className="text-sm text-muted-foreground">
-              Lat: {config.center.lat.toFixed(4)}, Lng:{" "}
-              {config.center.lng.toFixed(4)}
-            </p>
-          </Popup>
-        </Marker>
 
         {/* Points of Interest */}
         {config.pointsOfInterest &&
@@ -83,10 +65,24 @@ export default function VillageMapContent({ config }: VillageMapContentProps) {
           config.pointsOfInterest.map((poi, index) => (
             <Marker key={index} position={[poi.lat, poi.lng]}>
               <Popup>
-                <p className="font-semibold">{poi.name}</p>
-                <p className="text-sm text-muted-foreground capitalize">
-                  {poi.category}
-                </p>
+                <div className="space-y-2">
+                  <div>
+                    <p className="font-semibold">{poi.name}</p>
+                    <p className="text-sm text-muted-foreground capitalize">
+                      {poi.category}
+                    </p>
+                  </div>
+                  {poi.name === "Kalusidh Temple" && (
+                    <a
+                      href="https://kaluwala.in/blog/the-legend-of-the-siddh-finding-peace-at-kalusidh-temple"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-sm font-medium text-blue-600 hover:text-blue-800 underline"
+                    >
+                      Read about it →
+                    </a>
+                  )}
+                </div>
               </Popup>
             </Marker>
           ))}

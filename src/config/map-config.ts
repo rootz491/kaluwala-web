@@ -21,6 +21,8 @@ export interface MapConfig {
       | "market"
       | "hospital"
       | "government"
+      | "restaurant"
+      | "sport"
       | "other";
     icon?: string;
   }>;
@@ -108,19 +110,36 @@ export const MAP_CONFIG: MapConfig = {
   // Points of interest in the village
   // Optional: Mark specific locations (temples, schools, etc.)
   pointsOfInterest: [
-    // Example:
-    // {
-    //   name: "Kalusidh Temple",
-    //   lat: 32.433,
-    //   lng: 77.124,
-    //   category: "temple",
-    // },
-    // {
-    //   name: "Government Office",
-    //   lat: 32.431,
-    //   lng: 77.125,
-    //   category: "government",
-    // },
+    {
+      name: "Kalusidh Temple",
+      lat: 30.22404964687898,
+      lng: 78.14962592924563,
+      category: "temple",
+    },
+    {
+      name: "The Aatithiyam Resort",
+      lat: 30.216932744598417,
+      lng: 78.14439295189308,
+      category: "restaurant",
+    },
+    {
+      name: "CK Public School",
+      lat: 30.215314559542108,
+      lng: 78.14445872647737,
+      category: "school",
+    },
+    {
+      name: "Viraj Bhanu Cricket Academy",
+      lat: 30.214010372015444,
+      lng: 78.15357522533125,
+      category: "sport",
+    },
+    {
+      name: "Community Town Hall",
+      lat: 30.214896886706537,
+      lng: 78.15560171116029,
+      category: "government",
+    },
   ],
 
   // Map tile layer (Esri World Imagery - satellite view)
