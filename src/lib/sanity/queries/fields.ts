@@ -4,6 +4,7 @@ export const POST_FIELDS = `
   slug,
   excerpt,
   publishedAt,
+  telegramId,
   _updatedAt,
   body[]{
     ...,
@@ -36,6 +37,7 @@ export const BLOG_POST_FIELDS = `
   slug,
   excerpt,
   publishedAt,
+  telegramId,
   "featuredImage": mainImage.asset->url,
   "author": author->{
     name,

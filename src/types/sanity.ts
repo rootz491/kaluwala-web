@@ -66,6 +66,7 @@ export interface Post extends SanityDocument {
   author?: Author;
   categories?: Category[];
   tags?: Tag[];
+  telegramId?: string;
   seo?: {
     title?: string;
     description?: string;
