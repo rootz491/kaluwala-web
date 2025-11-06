@@ -5,3 +5,4 @@ export { PostContent } from "./post-content";
 export { PostsGrid } from "./posts-grid";
 export { SmartImage } from "./smart-image";
 export { TelegramDiscussion } from "./telegram-discussion";
+export { TelegramPostWidget } from "./telegram-post-widget";

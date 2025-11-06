@@ -37,32 +37,35 @@ export function TelegramDiscussion({
   colorful = true,
 }: TelegramDiscussionProps) {
   useEffect(() => {
-    // Load or reload the Telegram widget
-    // This script will process data-telegram-discussion attributes
-    const script = document.createElement("script");
-    script.src = "https://telegram.org/js/telegram-widget.js?22";
-    script.async = true;
-    script.defer = true;
+    // Load the Telegram widget script and trigger processing
+    // @ts-expect-error - tgPageData is Telegram's global object
+    if (window.tgPageData === undefined) {
+      const script = document.createElement("script");
+      script.src = "https://telegram.org/js/telegram-widget.js?22";
+      script.async = true;
 
-    // Append to body
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup is handled by Telegram widget
-    };
+      // After script loads, it will automatically process data-telegram-discussion elements
+      document.head.appendChild(script);
+    } else {
+      // Widget already loaded, trigger re-processing
+      // @ts-expect-error - tgPageData is Telegram's global object
+      window.tgPageData?.reset?.();
+    }
   }, [telegramId]);
 
   return (
     <div id={`telegram-discussion-${postSlug}`} className="my-8">
       <div className="rounded-lg border border-border bg-card overflow-hidden">
-        {/* Telegram Discussion Widget */}
-        <script
-          async
-          src="https://telegram.org/js/telegram-widget.js?22"
-          data-telegram-discussion={telegramId}
+        <blockquote
+          className="telegram-post"
+          data-telegram-discussion={`kaluwaladiscussions/${telegramId}`}
           data-comments-limit={commentsLimit}
           data-colorful={colorful ? "1" : "0"}
-        />
+        >
+          <section className="mx-auto my-8 text-center">
+            Loading discussion...
+          </section>
+        </blockquote>
       </div>
     </div>
   );
