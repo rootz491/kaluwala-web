@@ -1,6 +1,7 @@
 import { AdSenseScript } from "@/components/adsense";
 import { StructuredData } from "@/components/seo/structured-data";
 import AppwriteProvider from "@/context/appwrite-context";
+import AuthProvider from "@/context/auth-context";
 import TelegramProvider from "@/context/telegram-context";
 import { generateSEOMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -45,9 +46,11 @@ export default function RootLayout({
         />
         <AppwriteProvider>
           <TelegramProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <main className="flex-1">{children}</main>
-            </div>
+            <AuthProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <main className="flex-1">{children}</main>
+              </div>
+            </AuthProvider>
           </TelegramProvider>
         </AppwriteProvider>
       </body>

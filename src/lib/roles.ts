@@ -1,65 +1,40 @@
 /**
  * Role management utilities
- * Reads user role from Appwrite users collection
+ * Works with JWT auth from Cloudflare Worker
  */
-
-import { databases, DB_ID, COLLECTIONS } from "./appwrite";
 
 export type UserRole = "villager" | "distributor" | "admin";
 
-export interface AppwriteUser {
-  $id: string;
-  telegramId: string;
-  name: string;
-  role: UserRole;
-  lineIds?: string[]; // For distributors: which lines they manage
-  createdAt: string;
-  updatedAt: string;
-}
-
 /**
- * Get user by Telegram ID
+ * Check if user has required role (role hierarchy)
  */
-export async function getUserByTelegramId(
-  telegramId: string
-): Promise<AppwriteUser | null> {
-  try {
-    // Assuming telegramId is used as document ID or we query by it
-    const doc = await databases.getDocument(
-      DB_ID,
-      COLLECTIONS.USERS,
-      telegramId
-    );
-    return doc as unknown as AppwriteUser;
-  } catch {
-    return null;
-  }
-}
+export function hasRole(
+  userRole: UserRole | undefined,
+  requiredRole: UserRole
+): boolean {
+  if (!userRole) return false;
 
-/**
- * Check if user has required role
- */
-export function hasRole(user: AppwriteUser | null, requiredRole: UserRole): boolean {
-  if (!user) return false;
-  
   const roleHierarchy: Record<UserRole, number> = {
     villager: 1,
     distributor: 2,
     admin: 3,
   };
-  
-  return roleHierarchy[user.role] >= roleHierarchy[requiredRole];
+
+  return roleHierarchy[userRole] >= roleHierarchy[requiredRole];
 }
 
 /**
- * Check if user is a distributor for a specific line
+ * Check if user can manage a specific line
+ * Distributors can only manage their assigned lines
+ * Admins can manage all lines
  */
-export function isDistributorForLine(
-  user: AppwriteUser | null,
+export function canManageLine(
+  userRole: UserRole | undefined,
+  userLineIds: string[] | undefined,
   lineId: string
 ): boolean {
-  if (!user) return false;
-  if (user.role === "admin") return true;
-  if (user.role === "distributor" && user.lineIds?.includes(lineId)) return true;
+  if (!userRole) return false;
+  if (userRole === "admin") return true;
+  if (userRole === "distributor" && userLineIds?.includes(lineId)) return true;
   return false;
 }
