@@ -3,7 +3,7 @@
 import { useAuth, useAuthSafe } from "@/context/auth-context";
 import { UserRole } from "@/types/auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface RequireAuthProps {
   children: React.ReactNode;
@@ -23,10 +23,12 @@ export function RequireAuth({
 }: RequireAuthProps) {
   const { isAuthenticated, isLoading, user, hasRole, login } = useAuth();
   const router = useRouter();
+  const loginAttempted = useRef(false);
 
   useEffect(() => {
-    // Auto-login if we have Telegram context but not authenticated
-    if (!isLoading && !isAuthenticated) {
+    // Auto-login only once if we have Telegram context but not authenticated
+    if (!isLoading && !isAuthenticated && !loginAttempted.current) {
+      loginAttempted.current = true;
       login();
     }
   }, [isLoading, isAuthenticated, login]);
@@ -49,7 +51,10 @@ export function RequireAuth({
             Please open this app from Telegram to continue.
           </p>
           <button
-            onClick={() => login()}
+            onClick={() => {
+              loginAttempted.current = false;
+              login();
+            }}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Try Again
