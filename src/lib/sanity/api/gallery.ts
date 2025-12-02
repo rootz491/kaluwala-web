@@ -32,7 +32,7 @@ export async function getGalleryItems(
 
     // Fetch paginated items
     const query = `*[_type == "gallery" && status == "approved"]
-      | order(uploadedAt desc)
+      | order(coalesce(uploadedAt, _createdAt) desc)
       [${offset}...${offset + validLimit}]
       {
         _id,
