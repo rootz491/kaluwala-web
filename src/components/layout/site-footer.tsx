@@ -49,6 +49,23 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
+
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>
+            © {new Date().getFullYear()} Kaluwala. All rights reserved.
+            <br />
+            Developed by{" "}
+            <a
+              href="https://rootz491.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors underline"
+            >
+              rootz491
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
